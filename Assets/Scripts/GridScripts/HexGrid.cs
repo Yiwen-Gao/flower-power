@@ -98,7 +98,7 @@ public class HexGrid : MonoBehaviour
     {
         var col = cube.x;
         var row = cube.z + (cube.x - (cube.x & 1)) / 2;
-        return new Vector2Int(row, col);
+        return new Vector2Int(col, row);
     }
 
     public static Vector3Int oddq_to_cube(Vector2Int hex)
