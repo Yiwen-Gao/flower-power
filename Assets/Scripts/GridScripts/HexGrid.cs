@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 public class HexGrid : MonoBehaviour
 {
@@ -134,6 +135,32 @@ public class HexGrid : MonoBehaviour
 
         float y = hex_size * Mathf.Sqrt(3) * (hex.y + 0.5f * (hex.x & 1));
         return new Vector2(x, y);
+    }
+
+    public void generate_map()
+    {
+        HashSet<Vector2Int> existing_nodes = new HashSet<Vector2Int>();
+        System.Random random = new System.Random();
+        while(existing_nodes.Count < hex_size)
+        {
+            int num1 = random.Next(0, existing_nodes.Count);
+            Vector2Int existing_element = existing_nodes.ElementAt(num1);
+            List<Vector2Int> adj_coords = adjacent_coords(existing_element);
+            int num2 = random.Next(0, adj_coords.Count);
+            Vector2Int new_element = adj_coords[num2];
+            existing_nodes.Add(new_element);
+            hexgrid[new_element.x, new_element.y] = new Hex();
+            
+        }
+
+    }
+
+    public void print_map()
+    {
+        for(int i = 0; i < width; i++)
+            for(int j = 0; i < height; j++)
+                
+
     }
 
 }
