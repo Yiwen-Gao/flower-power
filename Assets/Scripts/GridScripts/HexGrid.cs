@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System;
 
 public class HexGrid : MonoBehaviour
 {
@@ -155,12 +154,12 @@ public class HexGrid : MonoBehaviour
 
     }
 
-    public void print_map()
+    /*public void print_map()
     {
         for(int i = 0; i < width; i++)
             for(int j = 0; i < height; j++)
                 
 
-    }
+    }*/
 
 }
