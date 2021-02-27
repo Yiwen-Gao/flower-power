@@ -47,6 +47,7 @@ public class HexGrid : MonoBehaviour
             if (out_of_bounds(v))
             {
                 results.RemoveAt(i);
+                i--;
             }
         }
 
