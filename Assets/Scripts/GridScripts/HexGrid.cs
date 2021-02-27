@@ -32,6 +32,8 @@ public class HexGrid : MonoBehaviour
 
                 Hex new_hex = new_object.GetComponent<Hex>();
                 hexgrid[i, j] = new_hex;
+                new_hex.setCoords(new Vector2Int(i,j));
+                new_hex.setTerrain((TileType)Random.Range(0,2));
             }
         }
     }
