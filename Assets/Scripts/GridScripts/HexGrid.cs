@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-//using System;
 
 public class HexGrid : MonoBehaviour
 {
@@ -11,7 +10,9 @@ public class HexGrid : MonoBehaviour
     public int width;
     public int height;
 
-    public float hex_size;
+    //add new var for number of land tiles
+
+    public float hex_size; //physical size of a hex
 
     public GameObject base_hex_object;
 
@@ -31,12 +32,14 @@ public class HexGrid : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                //GameObject new_object = Instantiate(base_hex_object,
-                //    oddq_offset_to_pixel(new Vector2Int(i,j)), Quaternion.identity, this.transform);
+                GameObject new_object = Instantiate(base_hex_object,
+                    oddq_offset_to_pixel(new Vector2Int(i,j)), Quaternion.identity, this.transform);
 
-                //Hex new_hex = new_object.GetComponent<Hex>();
-                //hexgrid[i, j] = new_hex;
-                hexgrid[i, j] = null; 
+
+                Hex new_hex = new_object.GetComponent<Hex>();
+                hexgrid[i, j] = new_hex;
+                new_hex.setCoords(new Vector2Int(i,j));
+                new_hex.setTerrain(TileType.Water);
             }
         }
     }
@@ -146,7 +149,10 @@ public class HexGrid : MonoBehaviour
         HashSet<Vector2Int> existing_nodes = new HashSet<Vector2Int>();
         Vector2Int first_element = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
         existing_nodes.Add(first_element);
-        while(existing_nodes.Count < hex_size)
+        hexgrid[first_element.x, first_element.y].setTerrain(TileType.Land);
+        Debug.Log(first_element.x);
+        Debug.Log(first_element.y);
+        while(existing_nodes.Count < 5) //to-do: replace hardcoded val w/ actual num of land tiles
         {
             int num1 = Random.Range(0, existing_nodes.Count);
             Vector2Int existing_element = existing_nodes.ElementAt(num1);
@@ -155,10 +161,7 @@ public class HexGrid : MonoBehaviour
             Vector2Int new_element = adj_coords[num2];
             existing_nodes.Add(new_element);
 
-            GameObject new_object = Instantiate(base_hex_object,
-                oddq_offset_to_pixel(new Vector2Int(3,4)), Quaternion.identity, this.transform);
-            Hex new_hex = new_object.GetComponent<Hex>();
-            hexgrid[new_element.x, new_element.y] = new_hex;
+            hexgrid[new_element.x, new_element.y].setTerrain(TileType.Land);
             
         }
 
@@ -170,7 +173,7 @@ public class HexGrid : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                if (hexgrid[i, j])
+                if (hexgrid[i, j].terrain == TileType.Land)
                     Debug.Log(1);
                 else
                     Debug.Log(0);
