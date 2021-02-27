@@ -8,17 +8,33 @@ public class HexGrid : MonoBehaviour
 {
     public Hex[,] hexgrid;
 
-    private int width;
-    private int height;
+    public int width;
+    public int height;
 
-    private int hex_size;
+    public float hex_size;
 
-    public void SetupGrid(int width_new, int height_new, int hex_size_new)
+    public GameObject base_hex_object;
+
+    void Start()
     {
-        width = width_new;
-        height = height_new;
-        hex_size = hex_size_new;
+        SetupGrid();
+    }
+
+    public void SetupGrid() //spawns in a grid with the desired dimensions
+    {
         hexgrid = new Hex[width, height];
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                GameObject new_object = Instantiate(base_hex_object,
+                    oddq_offset_to_pixel(new Vector2Int(i,j)), Quaternion.identity, this.transform);
+
+                Hex new_hex = new_object.GetComponent<Hex>();
+                hexgrid[i, j] = new_hex;
+            }
+        }
     }
 
     public List<Vector2Int> adjacent_coords(Vector2Int coords)
