@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System;
+//using System;
 
 public class HexGrid : MonoBehaviour
 {
@@ -18,6 +18,9 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
         SetupGrid();
+
+        generate_map();
+        print_map();
     }
 
     public void SetupGrid() //spawns in a grid with the desired dimensions
@@ -28,14 +31,17 @@ public class HexGrid : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                GameObject new_object = Instantiate(base_hex_object,
-                    oddq_offset_to_pixel(new Vector2Int(i,j)), Quaternion.identity, this.transform);
+                //GameObject new_object = Instantiate(base_hex_object,
+                //    oddq_offset_to_pixel(new Vector2Int(i,j)), Quaternion.identity, this.transform);
 
-                Hex new_hex = new_object.GetComponent<Hex>();
-                hexgrid[i, j] = new_hex;
+                //Hex new_hex = new_object.GetComponent<Hex>();
+                //hexgrid[i, j] = new_hex;
+                hexgrid[i, j] = null; 
             }
         }
     }
+
+
 
     public List<Vector2Int> adjacent_coords(Vector2Int coords)
     {
@@ -58,7 +64,7 @@ public class HexGrid : MonoBehaviour
             results.Add(new Vector2Int(coords.x + 1, coords.y - 1));
         }
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < results.Count; i++)
         {
             Vector2Int v = results[i];
             if (out_of_bounds(v))
@@ -138,16 +144,21 @@ public class HexGrid : MonoBehaviour
     public void generate_map()
     {
         HashSet<Vector2Int> existing_nodes = new HashSet<Vector2Int>();
-        System.Random random = new System.Random();
+        Vector2Int first_element = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
+        existing_nodes.Add(first_element);
         while(existing_nodes.Count < hex_size)
         {
-            int num1 = random.Next(0, existing_nodes.Count);
+            int num1 = Random.Range(0, existing_nodes.Count);
             Vector2Int existing_element = existing_nodes.ElementAt(num1);
             List<Vector2Int> adj_coords = adjacent_coords(existing_element);
-            int num2 = random.Next(0, adj_coords.Count);
+            int num2 = Random.Range(0, adj_coords.Count);
             Vector2Int new_element = adj_coords[num2];
             existing_nodes.Add(new_element);
-            hexgrid[new_element.x, new_element.y] = new Hex();
+
+            GameObject new_object = Instantiate(base_hex_object,
+                oddq_offset_to_pixel(new Vector2Int(3,4)), Quaternion.identity, this.transform);
+            Hex new_hex = new_object.GetComponent<Hex>();
+            hexgrid[new_element.x, new_element.y] = new_hex;
             
         }
 
@@ -155,10 +166,19 @@ public class HexGrid : MonoBehaviour
 
     public void print_map()
     {
-        for(int i = 0; i < width; i++)
-            for(int j = 0; i < height; j++)
-                
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (hexgrid[i, j])
+                    Debug.Log(1);
+                else
+                    Debug.Log(0);
+            }
+        }
 
     }
+
+
 
 }
