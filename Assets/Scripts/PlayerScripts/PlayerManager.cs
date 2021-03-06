@@ -4,12 +4,29 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
-    public List<Player> players = new ArrayList<>();
+    public static PlayerManager _instance;
+    public static PlayerManager Instance
+    {
+        get {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<PlayerManager>();
+             
+                if (_instance == null)
+                {
+                    return null;
+                }
+            }
+     
+            return _instance;
+        }
+    }
+
+    public List<Player> players = new List<Player>();
     private int idx;
     public Player currPlayer;
 
-    public HexGrid grid;
-    public GameObject camera;
+    public GameObject mainCamera;
 
     // Start is called before the first frame update
     void Start() {
@@ -19,10 +36,10 @@ public class PlayerManager : MonoBehaviour {
     }
 
     void AssignInitialTerritory() {
-        List<Hex> availableLand = new ArrayList<>();
-        Hex[,] hexgrid = grid.hexgrid;
-        for (int i = 0; i < hexgrid.Count; i++) {
-            for (int j = 0; j < hexgrid[i].Count; j++) {
+        List<Hex> availableLand = new List<Hex>();
+        Hex[,] hexgrid = HexGrid.Instance.hexgrid;
+        for (int i = 0; i < HexGrid.Instance.width; i++) {
+            for (int j = 0; j < HexGrid.Instance.height; j++) {
                 if (hexgrid[i, j].terrain != TileType.Water) {
                     availableLand.Add(hexgrid[i, j]);
                 }
@@ -32,18 +49,19 @@ public class PlayerManager : MonoBehaviour {
         foreach (Player player in players) {
             int rand = Random.Range(0, availableLand.Count);
             Hex hex = availableLand[rand];
-            player.AddTerritory(hex);
+            player.ClaimHex(hex);
             availableLand.RemoveAt(rand);
         }
     }
 
-    Vector2 FindCenter(List territory) {
-        float left, right, top, bottom = 0f;
+    Vector2 FindCenter(List<Hex> territory) {
+        float left, right, top, bottom;
+        left = right = top = bottom = 0f;
         foreach (Hex hex in territory) {
-            left = Math.min(left, hex.x_coord);
-            right = Math.max(right, hex.x_coord);
-            top = Math.min(left, hex.y_coord);
-            bottom = Math.max(right, hex.y_coord);
+            left = Mathf.Min(left, hex.x_coord);
+            right = Mathf.Max(right, hex.x_coord);
+            top = Mathf.Min(left, hex.y_coord);
+            bottom = Mathf.Max(right, hex.y_coord);
         }
 
         return new Vector2(
@@ -53,15 +71,16 @@ public class PlayerManager : MonoBehaviour {
     }
 
     void MoveCamera(Player player) {
-        List territory = player.GetTerritory();
-        Vector2 center = player.FindCenter(territory);
-        float cameraHeight = camera.transform.position.z;
-        camera.transform.position = new Vector3(center.x, center.y, cameraHeight);
+        List<Hex> territory = player.owned_hexes;
+        Vector2 center = FindCenter(territory);
+        float cameraHeight = mainCamera.transform.position.z;
+        mainCamera.transform.position = new Vector3(center.x, center.y, cameraHeight);
     }
 
     Player GetNextPlayer() {
         currPlayer = players[(idx++) % players.Count];
         MoveCamera(currPlayer);
+        currPlayer.UpdateDisplay();
         return currPlayer;
     }
 }

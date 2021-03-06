@@ -36,12 +36,12 @@ public class HexGrid : MonoBehaviour
 
     public GameObject base_hex_object;
 
-    void Start()
+    void Awake()
     {
         SetupGrid();
 
         generate_map();
-        print_map();
+        // print_map();
     }
 
     public void SetupGrid() //spawns in a grid with the desired dimensions
@@ -63,7 +63,7 @@ public class HexGrid : MonoBehaviour
             }
         }
         
-        DebugAssignPlayerHex(this.GetComponent<Player>(),hexgrid[Random.Range(0,width),Random.Range(0,height)]);
+        // DebugAssignPlayerHex(this.GetComponent<Player>(),hexgrid[Random.Range(0,width),Random.Range(0,height)]);
     }
 
 

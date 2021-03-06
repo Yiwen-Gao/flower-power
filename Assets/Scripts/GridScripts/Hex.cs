@@ -45,7 +45,7 @@ public class Hex : MonoBehaviour
     public void OnMouseDown()
     {
         Debug.Log("clicked");
-        Player p = HexGrid.Instance.GetComponent<Player>();
+        Player p = PlayerManager.Instance.currPlayer;
         if (p.candidate_hexes.Contains(this))
             p.ClaimHex(this); //replace with current player
     }

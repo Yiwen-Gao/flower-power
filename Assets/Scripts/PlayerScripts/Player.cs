@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     public void ClaimHex(Hex to_claim) //should we check for whether this is valid here?
     {
+        Debug.Log(player_number + " claimed hex(" + to_claim.x_coord + " " + to_claim.y_coord + ")");
         to_claim.owner = this;
         owned_hexes.Add(to_claim);
 
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
 
     public void UpdateDisplay() // checks candidates and sets up highlighting
     {
+        RemoveHighlights();
         CheckCandidates();
         DisplayCandidates();
         DisplayClaimed();
@@ -66,6 +68,11 @@ public class Player : MonoBehaviour
 
     private void DisplayCandidates()
     {
+        if (this != PlayerManager.Instance.currPlayer) 
+        {
+            return;
+        }
+        
         foreach (Hex h in candidate_hexes)
         {
             h.GetComponent<SpriteRenderer>().color = Color.green;
