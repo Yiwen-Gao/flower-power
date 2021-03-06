@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8543150324584515044}
   - component: {fileID: 8543150324584515051}
   - component: {fileID: 8132075103837543947}
+  - component: {fileID: 3196244514817991257}
   m_Layer: 0
   m_Name: Hex Tile
   m_TagString: Untagged
@@ -95,3 +96,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3771b78ab8ac8394cafa1f3897a83e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrain: 0
+--- !u!60 &3196244514817991257
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543150324584515050}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 13.25, y: 11.45}
+    newSize: {x: 13.29, y: 11.49}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 3.3806849, y: 5.6984653}
+      - {x: 6.666343, y: 0.00023388863}
+      - {x: 3.4031916, y: -5.7159095}
+      - {x: -3.3031464, y: -5.6709}
+      - {x: -6.5662994, y: 0.00023412704}
+      - {x: -3.2806435, y: 5.693871}

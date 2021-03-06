@@ -39,11 +39,21 @@ public class Hex : MonoBehaviour
         this.GetComponent<SpriteRenderer>().sprite =
             SpriteMaster.Instance.tile_sprites[(int) t].sprites[chosen_ind];
     }
+
+    /*public void OnMouseDown()
+    { //debug neighbors
+        Debug.Log("clicked");
+        HexGrid parent_grid = transform.parent.GetComponent<HexGrid>();
+        foreach (Vector2Int v in parent_grid.adjacent_coords(new Vector2Int(this.x_coord,this.y_coord)))
+        {
+            parent_grid.hexgrid[v.x,v.y].GetComponent<SpriteRenderer>().color = Color.red;
+        }
+    }*/
 }
 
 public enum TileType
 {
     Water = 0,
-    Land = 1,
+    Meadow = 1,
     Mountain = 2,
 }

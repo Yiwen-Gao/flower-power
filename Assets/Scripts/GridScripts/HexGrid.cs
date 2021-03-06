@@ -56,15 +56,15 @@ public class HexGrid : MonoBehaviour
         results.Add(new Vector2Int(coords.x - 1, coords.y));
         results.Add(new Vector2Int(coords.x + 1, coords.y));
 
-        if (coords.y % 2 == 0)
-        {
-            results.Add(new Vector2Int(coords.x - 1, coords.y + 1));
-            results.Add(new Vector2Int(coords.x + 1, coords.y + 1));
-        }
-        else
+        if (coords.x % 2 == 0)
         {
             results.Add(new Vector2Int(coords.x - 1, coords.y - 1));
             results.Add(new Vector2Int(coords.x + 1, coords.y - 1));
+        }
+        else
+        {
+            results.Add(new Vector2Int(coords.x - 1, coords.y + 1));
+            results.Add(new Vector2Int(coords.x + 1, coords.y + 1));
         }
 
         for (int i = 0; i < results.Count; i++)
@@ -140,7 +140,7 @@ public class HexGrid : MonoBehaviour
     {
         float x = hex_size * 3 / 2 * hex.x;
 
-        float y = hex_size * Mathf.Sqrt(3) * (hex.y + 0.5f * (hex.x & 1));
+        float y = -hex_size * Mathf.Sqrt(3) * (hex.y + 0.5f * (hex.x & 1));
         return new Vector2(x, y);
     }
 
@@ -149,7 +149,7 @@ public class HexGrid : MonoBehaviour
         HashSet<Vector2Int> existing_nodes = new HashSet<Vector2Int>();
         Vector2Int first_element = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
         existing_nodes.Add(first_element);
-        hexgrid[first_element.x, first_element.y].setTerrain(TileType.Land);
+        hexgrid[first_element.x, first_element.y].setTerrain(TileType.Meadow);
         Debug.Log(first_element.x);
         Debug.Log(first_element.y);
         while(existing_nodes.Count < 5) //to-do: replace hardcoded val w/ actual num of land tiles
@@ -161,7 +161,7 @@ public class HexGrid : MonoBehaviour
             Vector2Int new_element = adj_coords[num2];
             existing_nodes.Add(new_element);
 
-            hexgrid[new_element.x, new_element.y].setTerrain(TileType.Land);
+            hexgrid[new_element.x, new_element.y].setTerrain(TileType.Meadow);
             
         }
 
@@ -173,7 +173,7 @@ public class HexGrid : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                if (hexgrid[i, j].terrain == TileType.Land)
+                if (hexgrid[i, j].terrain == TileType.Meadow)
                     Debug.Log(1);
                 else
                     Debug.Log(0);
