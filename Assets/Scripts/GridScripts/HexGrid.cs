@@ -5,6 +5,26 @@ using UnityEngine;
 
 public class HexGrid : MonoBehaviour
 {
+    
+    public static HexGrid _instance;
+    public static HexGrid Instance
+    {
+        get {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<HexGrid>();
+             
+                if (_instance == null)
+                {
+                    return null;
+                }
+            }
+     
+            return _instance;
+        }
+    }
+    //using the code above, we can get the HexGrid from anywhere using HexGrid.Instance
+    
     public Hex[,] hexgrid;
 
     public int width;
@@ -42,6 +62,8 @@ public class HexGrid : MonoBehaviour
                 new_hex.setTerrain(TileType.Water);
             }
         }
+        
+        DebugAssignPlayerHex(this.GetComponent<Player>(),hexgrid[Random.Range(0,width),Random.Range(0,height)]);
     }
 
 
@@ -95,7 +117,7 @@ public class HexGrid : MonoBehaviour
         return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z)) / 2;
     }
 
-    public List<Vector2Int> hexes_within_distance(Vector2Int center, int distance)
+    public List<Vector2Int> coordinates_within_distance(Vector2Int center, int distance)
     {
         // returns hexes within the given distance that exist on the board
         List<Vector2Int> results = new List<Vector2Int>();
@@ -114,6 +136,18 @@ public class HexGrid : MonoBehaviour
         }
 
         return results;
+    }
+
+    public List<Hex> hexes_within_distance(Hex center, int distance)
+    {
+        List<Vector2Int> coords = coordinates_within_distance(new Vector2Int(center.x_coord, center.y_coord), distance);
+        List<Hex> result = new List<Hex>();
+        foreach (Vector2Int v in coords)
+        {
+            result.Add(hexgrid[v.x,v.y]);
+        }
+
+        return result;
     }
 
     public bool out_of_bounds(Vector2Int v)
@@ -152,7 +186,7 @@ public class HexGrid : MonoBehaviour
         hexgrid[first_element.x, first_element.y].setTerrain(TileType.Meadow);
         Debug.Log(first_element.x);
         Debug.Log(first_element.y);
-        while(existing_nodes.Count < 5) //to-do: replace hardcoded val w/ actual num of land tiles
+        while(existing_nodes.Count < 12) //to-do: replace hardcoded val w/ actual num of land tiles
         {
             int num1 = Random.Range(0, existing_nodes.Count);
             Vector2Int existing_element = existing_nodes.ElementAt(num1);
@@ -164,7 +198,6 @@ public class HexGrid : MonoBehaviour
             hexgrid[new_element.x, new_element.y].setTerrain(TileType.Meadow);
             
         }
-
     }
 
     public void print_map()
@@ -182,6 +215,8 @@ public class HexGrid : MonoBehaviour
 
     }
 
-
-
+    public void DebugAssignPlayerHex(Player p, Hex h)
+    {
+        p.ClaimHex(h);
+    }
 }

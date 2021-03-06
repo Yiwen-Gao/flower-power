@@ -9,6 +9,8 @@ public class Hex : MonoBehaviour
 
     public TileType terrain;
 
+    public Player owner;
+
     public void setCoords(Vector2Int coords)
     {
         x_coord = coords.x;
@@ -40,14 +42,22 @@ public class Hex : MonoBehaviour
             SpriteMaster.Instance.tile_sprites[(int) t].sprites[chosen_ind];
     }
 
-    /*public void OnMouseDown()
-    { //debug neighbors
+    public void OnMouseDown()
+    {
         Debug.Log("clicked");
-        HexGrid parent_grid = transform.parent.GetComponent<HexGrid>();
-        foreach (Vector2Int v in parent_grid.adjacent_coords(new Vector2Int(this.x_coord,this.y_coord)))
-        {
-            parent_grid.hexgrid[v.x,v.y].GetComponent<SpriteRenderer>().color = Color.red;
-        }
+        Player p = HexGrid.Instance.GetComponent<Player>();
+        if (p.candidate_hexes.Contains(this))
+            p.ClaimHex(this); //replace with current player
+    }
+
+    /*public void OnMouseEnter()
+    {
+        this.GetComponent<SpriteRenderer>().color = Color.yellow;
+    }
+
+    public void OnMouseExit()
+    {
+        this.GetComponent<SpriteRenderer>().color = Color.white;
     }*/
 }
 
