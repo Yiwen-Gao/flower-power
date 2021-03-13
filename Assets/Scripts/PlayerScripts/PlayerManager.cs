@@ -30,9 +30,11 @@ public class PlayerManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        idx = 0;
+        idx = players.Count-1;
         currPlayer = players[idx];
         AssignInitialTerritory();
+
+        GetNextPlayer();
     }
 
     void AssignInitialTerritory() {

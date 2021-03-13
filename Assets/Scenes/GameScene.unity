@@ -134,6 +134,22 @@ PrefabInstance:
       propertyPath: player_number
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.b
+      value: 0.0184803
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6745942224912310627, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
       propertyPath: m_Name
       value: Player (1)
@@ -205,6 +221,22 @@ PrefabInstance:
     - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
       propertyPath: player_number
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.g
+      value: 0.8028641
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6745942224912310627, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
       propertyPath: m_Name
@@ -362,6 +394,7 @@ GameObject:
   - component: {fileID: 1607950534}
   - component: {fileID: 1607950536}
   - component: {fileID: 1607950537}
+  - component: {fileID: 1607950538}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -450,6 +483,21 @@ MonoBehaviour:
   - {fileID: 464942412}
   currPlayer: {fileID: 1579494657111578483}
   mainCamera: {fileID: 519420028}
+--- !u!114 &1607950538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607950533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f65e8e42e06efe4a965deb556df5953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temporary_borders: []
+  claimed_borders: []
+  border_object: {fileID: 6333189556205816778, guid: 5489d7f472c38a64aa200f5b209ec61f, type: 3}
 --- !u!1001 &1579494657111578482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -457,6 +505,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579854222947428700, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
+      propertyPath: player_color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6745942224912310627, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
       propertyPath: m_Name
       value: Player
