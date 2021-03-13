@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public List<Hex> owned_hexes;
     public List<Hex> candidate_hexes; //hexes we might be able to expand to this turn
 
+    public Color player_color;
+
     /*public List<Flower> flowers;
     public List<Seed> seeds;*/
 
@@ -25,15 +27,15 @@ public class Player : MonoBehaviour
             candidate_hexes.Add(h);
         }
         
+        PlayerDisplayManager.Instance.AddClaimHighlight(to_claim);
         UpdateDisplay();
     }
 
     public void UpdateDisplay() // checks candidates and sets up highlighting
     {
-        RemoveHighlights();
+        PlayerDisplayManager.Instance.ClearTemporary();
         CheckCandidates();
-        DisplayCandidates();
-        DisplayClaimed();
+        PlayerDisplayManager.Instance.BuildTemporary(candidate_hexes);
     }
 
     public void RemoveHighlights()
@@ -64,45 +66,5 @@ public class Player : MonoBehaviour
         {
             candidate_hexes.Remove(h);
         }
-    }
-
-    private void DisplayCandidates()
-    {
-        if (this != PlayerManager.Instance.currPlayer) 
-        {
-            return;
-        }
-        
-        foreach (Hex h in candidate_hexes)
-        {
-            h.GetComponent<SpriteRenderer>().color = Color.green;
-        }
-    }
-
-    private void DisplayClaimed()
-    {
-        foreach (Hex h in owned_hexes)
-        {
-            h.GetComponent<SpriteRenderer>().color = Color.red;
-        }
-    }
-    
-    //DEBUG CODE
-
-    void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(10,10,400,700));
-
-        if (GUILayout.Button("Clear highlights"))
-        {
-            RemoveHighlights();
-        }
-        
-        if (GUILayout.Button("Add highlights"))
-        {
-            UpdateDisplay();
-        }
-        
-        GUILayout.EndArea();
     }
 }

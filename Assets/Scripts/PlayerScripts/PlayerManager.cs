@@ -30,9 +30,11 @@ public class PlayerManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        idx = 0;
+        idx = players.Count-1;
         currPlayer = players[idx];
         AssignInitialTerritory();
+
+        GetNextPlayer();
     }
 
     void AssignInitialTerritory() {
@@ -57,11 +59,16 @@ public class PlayerManager : MonoBehaviour {
     Vector2 FindCenter(List<Hex> territory) {
         float left, right, top, bottom;
         left = right = top = bottom = 0f;
+        if (territory.Count != 0)
+        {
+            left = right = territory[0].transform.position.x;
+            top = bottom = territory[0].transform.position.y;
+        }
         foreach (Hex hex in territory) {
-            left = Mathf.Min(left, hex.x_coord);
-            right = Mathf.Max(right, hex.x_coord);
-            top = Mathf.Min(left, hex.y_coord);
-            bottom = Mathf.Max(right, hex.y_coord);
+            left = Mathf.Min(left, hex.transform.position.x);
+            right = Mathf.Max(right, hex.transform.position.x);
+            top = Mathf.Max(top, hex.transform.position.y);
+            bottom = Mathf.Min(bottom, hex.transform.position.y);
         }
 
         return new Vector2(
