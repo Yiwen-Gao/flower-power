@@ -72,17 +72,29 @@ public class PlayerManager : MonoBehaviour {
         );
     }
 
-    void MoveCamera(Player player) {
+    public void MoveCamera(Player player) {
         List<Hex> territory = player.owned_hexes;
         Vector2 center = FindCenter(territory);
         float cameraHeight = mainCamera.transform.position.z;
         mainCamera.transform.position = new Vector3(center.x, center.y, cameraHeight);
     }
 
-    Player GetNextPlayer() {
+    public void GetNextPlayer() {
         currPlayer = players[(idx++) % players.Count];
         MoveCamera(currPlayer);
         currPlayer.UpdateDisplay();
-        return currPlayer;
+        // return currPlayer;
+    }
+
+    void OnGUI()
+    {
+        GUILayout.BeginArea(new Rect(Screen.width - 100,Screen.height - 50,100,50));
+
+        if (GUILayout.Button("Next Player"))
+        {
+            GetNextPlayer();
+        }
+
+        GUILayout.EndArea();
     }
 }
