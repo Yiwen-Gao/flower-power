@@ -81,7 +81,8 @@ public class PlayerManager : MonoBehaviour {
         List<Hex> territory = player.owned_hexes;
         Vector2 center = FindCenter(territory);
         float cameraHeight = mainCamera.transform.position.z;
-        mainCamera.transform.position = new Vector3(center.x, center.y, cameraHeight);
+        CameraScript.Instance.SetTarget(new Vector3(center.x, center.y, cameraHeight));
+        CameraScript.Instance.ResetZoom();
     }
 
     public void GetNextPlayer() {
