@@ -6,12 +6,12 @@ public class Inventory : MonoBehaviour
 {
     private Dictionary<string,int> items;
 
-    public Start() 
+    public void Start() 
     { 
         items = new Dictionary<string,int>();
     }
 
-    public boolean AddItem(string name, int count)
+    public bool AddItem(string name, int count)
     {
         if (items.ContainsKey(name))
         {
@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public boolean RemoveItem(string name, int count)
+    public bool RemoveItem(string name, int count)
     {
         if (items.ContainsKey(name) && items[name] >= count)
         {
