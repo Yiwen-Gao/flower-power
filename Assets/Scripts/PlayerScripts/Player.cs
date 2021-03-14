@@ -12,8 +12,7 @@ public class Player : MonoBehaviour
 
     public Color player_color;
 
-    /*public List<Flower> flowers;
-    public List<Seed> seeds;*/
+    // private Inventory inventory;
 
     public void ClaimHex(Hex to_claim) //should we check for whether this is valid here?
     {
@@ -33,6 +32,7 @@ public class Player : MonoBehaviour
 
     public void UpdateDisplay() // checks candidates and sets up highlighting
     {
+        PlayerDisplayManager.Instance.SetCurrentPlayerInfo(this.player_name, this.player_color);
         PlayerDisplayManager.Instance.ClearTemporary();
         CheckCandidates();
         PlayerDisplayManager.Instance.BuildTemporary(candidate_hexes);

@@ -184,9 +184,7 @@ public class HexGrid : MonoBehaviour
         Vector2Int first_element = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
         existing_nodes.Add(first_element);
         hexgrid[first_element.x, first_element.y].setTerrain(TileType.Meadow);
-        Debug.Log(first_element.x);
-        Debug.Log(first_element.y);
-        while(existing_nodes.Count < 12) //to-do: replace hardcoded val w/ actual num of land tiles
+        while(existing_nodes.Count < 24) //to-do: replace hardcoded val w/ actual num of land tiles
         {
             int num1 = Random.Range(0, existing_nodes.Count);
             Vector2Int existing_element = existing_nodes.ElementAt(num1);
@@ -196,7 +194,6 @@ public class HexGrid : MonoBehaviour
             existing_nodes.Add(new_element);
 
             hexgrid[new_element.x, new_element.y].setTerrain(TileType.Meadow);
-            
         }
     }
 

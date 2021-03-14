@@ -30,14 +30,14 @@ public class PlayerManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        idx = players.Count-1;
+        idx = 0; //players.Count-1;
         currPlayer = players[idx];
         AssignInitialTerritory();
 
         GetNextPlayer();
     }
 
-    void AssignInitialTerritory() {
+    private void AssignInitialTerritory() {
         List<Hex> availableLand = new List<Hex>();
         Hex[,] hexgrid = HexGrid.Instance.hexgrid;
         for (int i = 0; i < HexGrid.Instance.width; i++) {
@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    Vector2 FindCenter(List<Hex> territory) {
+    private Vector2 FindCenter(List<Hex> territory) {
         float left, right, top, bottom;
         left = right = top = bottom = 0f;
         if (territory.Count != 0)
@@ -71,17 +71,14 @@ public class PlayerManager : MonoBehaviour {
             bottom = Mathf.Min(bottom, hex.transform.position.y);
         }
 
-        return new Vector2(
-            (left + right) / 2,
-            (top + bottom) / 2
-        );
+        return new Vector2((left + right) / 2, (top + bottom) / 2);
     }
 
-    public void MoveCamera(Player player) {
+    private void MoveCamera(Player player) {
         List<Hex> territory = player.owned_hexes;
         Vector2 center = FindCenter(territory);
-        float cameraHeight = mainCamera.transform.position.z;
-        CameraScript.Instance.SetTarget(new Vector3(center.x, center.y, cameraHeight));
+        float currHeight = mainCamera.transform.position.z;
+        CameraScript.Instance.SetTarget(new Vector3(center.x, center.y, currHeight));
         CameraScript.Instance.ResetZoom();
     }
 
@@ -89,18 +86,42 @@ public class PlayerManager : MonoBehaviour {
         currPlayer = players[(idx++) % players.Count];
         MoveCamera(currPlayer);
         currPlayer.UpdateDisplay();
-        // return currPlayer;
     }
 
-    void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(Screen.width - 100,Screen.height - 50,100,50));
+    // Texture2D CreateTexture(int width, int height, Color color) {
+    //     Color[] pixels = new Color[width * height];
+    //     for (int i = 0; i < pixels.Length; i++) {
+    //         pixels[i] = color;
+    //     }
 
-        if (GUILayout.Button("Next Player"))
-        {
-            GetNextPlayer();
-        }
+    //     Texture2D texture = new Texture2D(width, height);
+    //     texture.SetPixels(pixels);
+    //     texture.Apply();
+    //     return texture;
+    // }
 
-        GUILayout.EndArea();
-    }
+    // void OnGUI() {
+    //     int width = 100;
+    //     int height = 50;
+    //     int margin = 5;
+    //     GUIStyle style = new GUIStyle();
+    //     style.normal.background = CreateTexture(width, height, currPlayer.player_color);
+
+    //     GUILayout.BeginArea(
+    //         new Rect(Screen.width - width - margin,Screen.height - height - margin, width, height),
+    //         style
+    //     );
+    //     GUILayout.Label(
+    //         $"Player {currPlayer.player_name}",
+    //         GUILayout.Height(25),
+    //         GUILayout.ExpandHeight(false)
+    //     );
+    //     if (GUILayout.Button("Next Player"))
+    //     {
+    //         GetNextPlayer();
+    //     }
+
+    //     GUILayout.EndArea();
+    // }
+
 }

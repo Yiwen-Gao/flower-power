@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerDisplayManager : MonoBehaviour
 {
@@ -27,6 +29,8 @@ public class PlayerDisplayManager : MonoBehaviour
 
     public GameObject border_object;
 
+    public GameObject player_info;
+
     public void ClearTemporary()
     {
         foreach (GameObject o in temporary_borders)
@@ -51,5 +55,15 @@ public class PlayerDisplayManager : MonoBehaviour
         GameObject new_border = Instantiate(border_object, to_highlight.transform.position, Quaternion.identity, to_highlight.transform);
         new_border.GetComponent<SpriteRenderer>().color = to_highlight.owner.player_color;
         claimed_borders.Add(new_border);
+    }
+
+    public void SetCurrentPlayerInfo(string player_name, Color player_color) 
+    {
+        TMP_Text name = player_info.GetComponentInChildren<TMP_Text>();
+        Image background = player_info.GetComponent<Image>();
+
+        name.text = player_name;
+        name.color = player_color;
+        background.color = player_color;
     }
 }
