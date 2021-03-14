@@ -67,4 +67,5 @@ public class Player : MonoBehaviour
             candidate_hexes.Remove(h);
         }
     }
+    
 }
