@@ -88,6 +88,19 @@ public class PlayerManager : MonoBehaviour {
         currPlayer.UpdateDisplay();
     }
 
+    public void trade(Player other) {
+        Dictionary<string,int> items1 = currPlayer.inventory.getTradeItems();
+        Dictionary<string,int> items2 = other.inventory.getTradeItems();
+        
+        currPlayer.inventory.confirmTrade(items2);
+        other.inventory.confirmTrade(items1);
+        
+        currPlayer.inventory.emptyTradeItems();
+        other.inventory.emptyTradeItems();
+    }
+
+
+
     // Texture2D CreateTexture(int width, int height, Color color) {
     //     Color[] pixels = new Color[width * height];
     //     for (int i = 0; i < pixels.Length; i++) {
