@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private Dictionary<string,int> items;
+    private Dictionary<string,int> allItems;
+
+    private Dictionary<string,int> tradeItems;
 
     public void Start() 
     { 
-        items = new Dictionary<string,int>();
+        allItems = new Dictionary<string,int>();
+        tradeItems = new Dictionary<string,int>();
     }
 
-    public bool AddItem(string name, int count)
+    private bool AddItem(Dictionary<string,int> items, string name, int count)
     {
         if (items.ContainsKey(name))
         {
@@ -24,7 +27,7 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public bool RemoveItem(string name, int count)
+    private bool RemoveItem(Dictionary<string,int> items, string name, int count)
     {
         if (items.ContainsKey(name) && items[name] >= count)
         {
@@ -33,6 +36,43 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
+    public void AddToTradeItems(string name, int count)
+    {
+        AddItem(tradeItems, name, count);
+    }
+
+    public void RemoveFromTradeItems(string name, int count)
+    {
+        RemoveItem(tradeItems, name, count);
+    }
+
+    public void confirmTrade(Dictionary<string,int> receivedItems) {
+        foreach(var item in tradeItems) 
+        {
+            allItems[item.Key] -= item.Value;
+        }
+        foreach(var item in receivedItems) 
+        {
+            if (allItems.ContainsKey(item.Key))
+            {
+                allItems[item.Key] += item.Value;
+            }
+            else 
+            {
+                allItems.Add(item.Key,item.Value);
+            }
+        }
+    }
+
+    public Dictionary<string,int> getTradeItems() {
+        return tradeItems;
+    }
+
+    public void emptyTradeItems() {
+        tradeItems = new Dictionary<string,int>();
+    }
+
 
 
 

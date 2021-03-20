@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     public Color player_color;
 
-    // private Inventory inventory;
+    public Inventory inventory;
 
     public void ClaimHex(Hex to_claim) //should we check for whether this is valid here?
     {
@@ -66,6 +66,14 @@ public class Player : MonoBehaviour
         {
             candidate_hexes.Remove(h);
         }
+    }
+
+    private void addToTrade(string item, int count) {
+        inventory.AddToTradeItems(item, count);
+    }
+
+    private void removeFromTrade(string item, int count) {
+        inventory.RemoveFromTradeItems(item, count);
     }
     
 }
