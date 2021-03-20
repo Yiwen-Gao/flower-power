@@ -1093,8 +1093,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5845f52d1498846a1cbc4055c3b8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 8
-  height: 8
+  width: 20
+  height: 20
+  landmass_size: 300
   hex_size: 0.66
   base_hex_object: {fileID: 8543150324584515050, guid: 5da42d05748f8754bb6ff940edde5560, type: 3}
 --- !u!4 &1607950535
