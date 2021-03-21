@@ -23,11 +23,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public Vector3 target_position;
-    private Vector3 closed_position;
-    private Vector3 open_position = new Vector3(0,0,0);
-    private float closed_rotation = 180;
-    private float open_rotation = 0;
+    public Vector2 target_position;
+    private Vector2 closed_position;
+    private Vector2 open_position = new Vector2(-420,-20);
+    private float closed_rotation = 90;
+    private float open_rotation = 270;
     public float target_rotation;
     
     public bool is_open = false;
@@ -36,13 +36,15 @@ public class UIManager : MonoBehaviour
     public float transition_time;
     
     public GameObject menu_popout;
+    private RectTransform rt;
     public GameObject popout_arrow;
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
-        closed_position = menu_popout.transform.localPosition;
+        rt = menu_popout.GetComponent<RectTransform>();
+        closed_position = rt.anchoredPosition;
         target_position = closed_position;
         target_rotation = closed_rotation;
     }
@@ -53,7 +55,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         animation_timer = Mathf.Clamp(animation_timer + Time.deltaTime,0f,transition_time);
-        menu_popout.transform.localPosition = Vector3.Lerp(menu_popout.transform.localPosition,
+        rt.anchoredPosition = Vector3.Lerp(rt.anchoredPosition,
             target_position, animation_timer / transition_time);
         popout_arrow.transform.localRotation = Quaternion.Euler(new Vector3(0,0,
             Mathf.Lerp(popout_arrow.transform.localEulerAngles.z,target_rotation,animation_timer/transition_time)));
@@ -75,5 +77,4 @@ public class UIManager : MonoBehaviour
         animation_timer = 0f;
         is_open = !is_open;
     }
-
 }

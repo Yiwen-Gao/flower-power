@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Hex : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class Hex : MonoBehaviour
 
     public void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         //Debug.Log("clicked");
         Player p = PlayerManager.Instance.currPlayer;
         if (p.candidate_hexes.Contains(this))
