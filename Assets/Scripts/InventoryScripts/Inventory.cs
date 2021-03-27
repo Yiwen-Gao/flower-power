@@ -62,11 +62,6 @@ public class Inventory : MonoBehaviour
     {
         return AddItem(allItems, name, count);
     }
-
-    public void AddToAllItems(string name, int count)
-    {
-        AddItem(allItems, name, count);
-    }
     
     public bool RemoveFromAllItems(string name, int count)
     {
@@ -95,17 +90,12 @@ public class Inventory : MonoBehaviour
         return tradeItems;
     }
 
-<<<<<<< HEAD
-    public Dictionary<string,int> getAllItems() {
+    public Dictionary<string,int> GetAllItems() {
         return allItems;
     }
 
     public void emptyTradeItems() {
         tradeItems = new Dictionary<string,int>();
-=======
-        public Dictionary<string,int> GetAllItems() {
-        return allItems;
->>>>>>> c1426d70d2f4cd9ce4cfa973a70412ff6d05bdab
     }
 
     public void ResetTradeItems() {

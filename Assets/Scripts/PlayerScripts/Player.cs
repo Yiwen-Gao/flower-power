@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
     }
 
     private void harvest(Hex h) {
-        inventory.AddItem(allItems, h.plant_name, h.abundance);
-        h.time_to_harvest = 0;
+        inventory.AddToAllItems(h.plant_name, h.plant_abundance);
+        h.plant_time = 0;
     }
 }

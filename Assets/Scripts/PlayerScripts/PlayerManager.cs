@@ -86,9 +86,8 @@ public class PlayerManager : MonoBehaviour {
         currPlayer = players[(idx++) % players.Count];
         MoveCamera(currPlayer);
         currPlayer.UpdateDisplay();
-        currPlayer.updatePlantTime();
-        currPlayer.harvestPlants();
         InvUIDriver.Instance.UpdateInventory(currPlayer.inventory);
+        updatePlantTime(currPlayer);
     }
 
     public void Trade(Player otherPlayer) {
@@ -102,7 +101,7 @@ public class PlayerManager : MonoBehaviour {
         otherPlayer.inventory.ResetTradeItems();
     }
 
-    public void updatePlantTime() {
+    public void updatePlantTime(Player currPlayer) {
         foreach (Hex h in currPlayer.owned_hexes) {
             if (h.plant_name != null) {
                 h.plant_time += 1;
