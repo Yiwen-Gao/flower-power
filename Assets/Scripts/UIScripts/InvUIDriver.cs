@@ -49,7 +49,7 @@ public class InvUIDriver : MonoBehaviour
         {
             GameObject new_inv_object = Instantiate(inv_obj_prefab);
             new_inv_object.GetComponent<InvUICell>().UpdateStats(kvp.Key,kvp.Value);
-            new_inv_object.transform.parent = grid_container.transform;
+            new_inv_object.transform.SetParent(grid_container.transform);
             inventory_objects.Add(new_inv_object);
         }
     }
