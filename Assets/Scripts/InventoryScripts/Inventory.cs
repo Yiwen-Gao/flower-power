@@ -5,7 +5,6 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public Dictionary<string,int> allItems;
-
     private Dictionary<string,int> tradeItems;
 
     public void Start() 
@@ -13,19 +12,19 @@ public class Inventory : MonoBehaviour
         allItems = new Dictionary<string,int>();
         tradeItems = new Dictionary<string,int>();
 
-        /* AddItem(allItems, "TrumpetFlower", 1);
+        AddItem(allItems, "TrumpetFlower", 1);
         AddItem(allItems, "Lavender", 2);
         for (char c = 'a'; c <= 'z'; c++)
         {
             AddItem(allItems, c.ToString(), 1);
-        } */
+        }
     }
 
     private bool AddItem(Dictionary<string,int> items, string name, int count)
     {
         if (items.ContainsKey(name))
         {
-            items[name] +=  count;
+            items[name] += count;
         }
         else 
         {
@@ -44,17 +43,32 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public void AddToTradeItems(string name, int count)
+    public bool AddToTradeItems(string name, int count)
     {
-        AddItem(tradeItems, name, count);
+        int prevCount = tradeItems.ContainsKey(name) ? tradeItems[name] : 0;
+        if (!allItems.ContainsKey(name) || (allItems[name] < count + prevCount)) 
+        {
+            return false;
+        }
+        return AddItem(tradeItems, name, count);
     }
 
-    public void RemoveFromTradeItems(string name, int count)
+    public bool RemoveFromTradeItems(string name, int count)
     {
-        RemoveItem(tradeItems, name, count);
+        return RemoveItem(tradeItems, name, count);
     }
 
-    public void confirmTrade(Dictionary<string,int> receivedItems) {
+    public bool AddToAllItems(string name, int count)
+    {
+        return AddItem(allItems, name, count);
+    }
+
+    public bool RemoveFromAllItems(string name, int count)
+    {
+        return RemoveItem(allItems, name, count);
+    }
+
+    public void ConfirmTrade(Dictionary<string,int> receivedItems) {
         foreach(var item in tradeItems) 
         {
             allItems[item.Key] -= item.Value;
@@ -72,15 +86,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public Dictionary<string,int> getTradeItems() {
+    public Dictionary<string,int> GetTradeItems() {
         return tradeItems;
     }
 
-    public void emptyTradeItems() {
-        tradeItems = new Dictionary<string,int>();
+        public Dictionary<string,int> GetAllItems() {
+        return allItems;
     }
 
-
-
-
+    public void ResetTradeItems() {
+        tradeItems = new Dictionary<string,int>();
+    }
 }

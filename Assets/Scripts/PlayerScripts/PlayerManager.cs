@@ -89,53 +89,14 @@ public class PlayerManager : MonoBehaviour {
         InvUIDriver.Instance.UpdateInventory(currPlayer.inventory);
     }
 
-    public void trade(Player other) {
-        Dictionary<string,int> items1 = currPlayer.inventory.getTradeItems();
-        Dictionary<string,int> items2 = other.inventory.getTradeItems();
+    public void Trade(Player otherPlayer) {
+        Dictionary<string,int> currItems = currPlayer.inventory.GetTradeItems();
+        Dictionary<string,int> otherItems = otherPlayer.inventory.GetTradeItems();
         
-        currPlayer.inventory.confirmTrade(items2);
-        other.inventory.confirmTrade(items1);
+        currPlayer.inventory.ConfirmTrade(otherItems);
+        otherPlayer.inventory.ConfirmTrade(currItems);
         
-        currPlayer.inventory.emptyTradeItems();
-        other.inventory.emptyTradeItems();
+        currPlayer.inventory.ResetTradeItems();
+        otherPlayer.inventory.ResetTradeItems();
     }
-
-
-
-    // Texture2D CreateTexture(int width, int height, Color color) {
-    //     Color[] pixels = new Color[width * height];
-    //     for (int i = 0; i < pixels.Length; i++) {
-    //         pixels[i] = color;
-    //     }
-
-    //     Texture2D texture = new Texture2D(width, height);
-    //     texture.SetPixels(pixels);
-    //     texture.Apply();
-    //     return texture;
-    // }
-
-    // void OnGUI() {
-    //     int width = 100;
-    //     int height = 50;
-    //     int margin = 5;
-    //     GUIStyle style = new GUIStyle();
-    //     style.normal.background = CreateTexture(width, height, currPlayer.player_color);
-
-    //     GUILayout.BeginArea(
-    //         new Rect(Screen.width - width - margin,Screen.height - height - margin, width, height),
-    //         style
-    //     );
-    //     GUILayout.Label(
-    //         $"Player {currPlayer.player_name}",
-    //         GUILayout.Height(25),
-    //         GUILayout.ExpandHeight(false)
-    //     );
-    //     if (GUILayout.Button("Next Player"))
-    //     {
-    //         GetNextPlayer();
-    //     }
-
-    //     GUILayout.EndArea();
-    // }
-
 }
