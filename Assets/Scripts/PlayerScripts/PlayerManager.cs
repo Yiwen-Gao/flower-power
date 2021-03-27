@@ -86,6 +86,7 @@ public class PlayerManager : MonoBehaviour {
         currPlayer = players[(idx++) % players.Count];
         MoveCamera(currPlayer);
         currPlayer.UpdateDisplay();
+        InvUIDriver.Instance.UpdateInventory(currPlayer.inventory);
     }
 
     public void trade(Player other) {

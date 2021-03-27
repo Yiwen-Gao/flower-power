@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private Dictionary<string,int> allItems;
+    public Dictionary<string,int> allItems;
 
     private Dictionary<string,int> tradeItems;
 
@@ -12,6 +12,13 @@ public class Inventory : MonoBehaviour
     { 
         allItems = new Dictionary<string,int>();
         tradeItems = new Dictionary<string,int>();
+
+        /* AddItem(allItems, "TrumpetFlower", 1);
+        AddItem(allItems, "Lavender", 2);
+        for (char c = 'a'; c <= 'z'; c++)
+        {
+            AddItem(allItems, c.ToString(), 1);
+        } */
     }
 
     private bool AddItem(Dictionary<string,int> items, string name, int count)

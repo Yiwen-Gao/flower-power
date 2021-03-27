@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraScript : MonoBehaviour
 {
@@ -76,10 +77,14 @@ public class CameraScript : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            cam.orthographicSize =
-                Mathf.Clamp(cam.orthographicSize + 
-                            Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * -zoom_speed,min_cam_size,max_cam_size);
-            should_go_to_target = false;
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                cam.orthographicSize =
+                    Mathf.Clamp(cam.orthographicSize +
+                                Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * -zoom_speed, min_cam_size,
+                        max_cam_size);
+                should_go_to_target = false;
+            }
         }
     }
 

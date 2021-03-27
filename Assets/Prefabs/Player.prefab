@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9060282007758051190}
   - component: {fileID: 2579854222947428700}
+  - component: {fileID: -89036655537527412}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -47,3 +48,17 @@ MonoBehaviour:
   player_number: 0
   owned_hexes: []
   candidate_hexes: []
+  player_color: {r: 0, g: 0, b: 0, a: 0}
+  inventory: {fileID: -89036655537527412}
+--- !u!114 &-89036655537527412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6745942224912310627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d608467784d1845d8982a86603f77e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
