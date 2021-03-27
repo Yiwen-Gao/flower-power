@@ -7,4 +7,5 @@ public class FlowerData : ScriptableObject
 {
     public string flower_name;
     public Texture image;
+    public int time_to_harvest;
 }

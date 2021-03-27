@@ -86,6 +86,8 @@ public class PlayerManager : MonoBehaviour {
         currPlayer = players[(idx++) % players.Count];
         MoveCamera(currPlayer);
         currPlayer.UpdateDisplay();
+        currPlayer.updatePlantTime();
+        currPlayer.harvestPlants();
     }
 
     public void trade(Player other) {
@@ -98,6 +100,21 @@ public class PlayerManager : MonoBehaviour {
         currPlayer.inventory.emptyTradeItems();
         other.inventory.emptyTradeItems();
     }
+
+    public void updatePlantTime() {
+        foreach (Hex h in currPlayer.owned_hexes) {
+            if (h.plant_name != null) {
+                h.plant_time += 1;
+            }
+        }
+    }
+
+    // public void harvestPlants() {
+    //     foreach (Hex h in currPlayer.owned_hexes) {
+    //         // if ( h.plant_time == time_to_harvest) {
+    //         //     currPlayer.harvest(h);
+    //         // }
+    // }
 
 
 

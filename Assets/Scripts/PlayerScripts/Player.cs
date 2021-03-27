@@ -75,5 +75,15 @@ public class Player : MonoBehaviour
     private void removeFromTrade(string item, int count) {
         inventory.RemoveFromTradeItems(item, count);
     }
+
+    private void plant(Hex h, string plant_name) {
+        h.setPlant(plant_name);
+        inventory.AddToAllItems(plant_name, 1);
+    }
+
+    private void harvest(Hex h) {
+        inventory.AddItem(allItems, h.plant_name, h.abundance);
+        h.time_to_harvest = 0;
+    }
     
 }

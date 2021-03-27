@@ -12,6 +12,10 @@ public class Hex : MonoBehaviour
 
     public Player owner;
 
+    public string plant_name;
+    public int plant_abundance;
+    public int plant_time;
+
     public void setCoords(Vector2Int coords)
     {
         x_coord = coords.x;
@@ -50,6 +54,12 @@ public class Hex : MonoBehaviour
         Player p = PlayerManager.Instance.currPlayer;
         if (p.candidate_hexes.Contains(this))
             p.ClaimHex(this); //replace with current player
+    }
+
+    public void setPlant(string plant_name) {
+        this.plant_name = plant_name;
+        this.plant_abundance = 1; // different abundance for each hex/flower pair
+        this.plant_time = 0;
     }
 
     /*public void OnMouseEnter()

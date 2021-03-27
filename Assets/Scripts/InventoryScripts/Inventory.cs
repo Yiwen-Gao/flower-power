@@ -47,6 +47,16 @@ public class Inventory : MonoBehaviour
         RemoveItem(tradeItems, name, count);
     }
 
+    public void AddToAllItems(string name, int count)
+    {
+        AddItem(allItems, name, count);
+    }
+
+    public void RemoveFromAllItems(string name, int count)
+    {
+        RemoveItem(allItems, name, count);
+    }
+
     public void confirmTrade(Dictionary<string,int> receivedItems) {
         foreach(var item in tradeItems) 
         {
@@ -67,6 +77,10 @@ public class Inventory : MonoBehaviour
 
     public Dictionary<string,int> getTradeItems() {
         return tradeItems;
+    }
+
+    public Dictionary<string,int> getAllItems() {
+        return allItems;
     }
 
     public void emptyTradeItems() {
