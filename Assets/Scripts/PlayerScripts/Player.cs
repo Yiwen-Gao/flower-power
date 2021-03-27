@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     public Color player_color;
 
-    public Inventory inventory;
+    public Inventory inventory;// = new Inventory();
 
     public void ClaimHex(Hex to_claim) //should we check for whether this is valid here?
     {
@@ -68,12 +68,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void addToTrade(string item, int count) {
+    public void AddToTradeItems(string item, int count) {
         inventory.AddToTradeItems(item, count);
     }
 
-    private void removeFromTrade(string item, int count) {
+    public void RemoveFromTradeItems(string item, int count) {
         inventory.RemoveFromTradeItems(item, count);
+    }
+    
+    public void AddToAllItems(string item, int count) {
+        inventory.AddToAllItems(item, count);
+    }
+
+    public void RemoveFromAllItems(string item, int count) {
+        inventory.RemoveFromAllItems(item, count);
     }
 
     private void plant(Hex h, string plant_name) {
@@ -85,5 +93,4 @@ public class Player : MonoBehaviour
         inventory.AddItem(allItems, h.plant_name, h.abundance);
         h.time_to_harvest = 0;
     }
-    
 }
