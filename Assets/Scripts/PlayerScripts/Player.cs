@@ -30,12 +30,18 @@ public class Player : MonoBehaviour
         UpdateDisplay();
     }
 
-    public void UpdateDisplay() // checks candidates and sets up highlighting
+    public void UpdateDisplay() 
     {
+        // display player's name and color
         PlayerDisplayManager.Instance.SetCurrentPlayerInfo(this.player_name, this.player_color);
+
+        // checks candidates and display player's territory
         PlayerDisplayManager.Instance.ClearTemporary();
         CheckCandidates();
         PlayerDisplayManager.Instance.BuildTemporary(candidate_hexes);
+
+        // display player's items
+        InvUIDriver.Instance.UpdateInventory(this.inventory);
     }
 
     public void RemoveHighlights()
