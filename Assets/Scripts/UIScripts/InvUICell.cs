@@ -15,7 +15,7 @@ public class InvUICell : MonoBehaviour
 
     private Image img;
 
-    private Text name;
+    private new Text name;
 
     private Text count;
     // Start is called before the first frame update

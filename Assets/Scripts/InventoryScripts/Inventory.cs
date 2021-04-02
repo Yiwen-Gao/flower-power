@@ -12,11 +12,11 @@ public class Inventory : MonoBehaviour
         allItems = new Dictionary<string,int>();
         tradeItems = new Dictionary<string,int>();
 
-        AddItem(allItems, "TrumpetFlower", 1);
-        AddItem(allItems, "Lavender", 2);
+        AddToAllItems("TrumpetFlower", 1);
+        AddToAllItems("Lavender", 2);
         for (char c = 'a'; c <= 'z'; c++)
         {
-            AddItem(allItems, c.ToString(), 1);
+            AddToAllItems(c.ToString(), 1);
         }
     }
 
