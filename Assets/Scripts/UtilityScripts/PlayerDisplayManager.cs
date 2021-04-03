@@ -31,6 +31,8 @@ public class PlayerDisplayManager : MonoBehaviour
 
     public GameObject player_info;
 
+    
+
     public void ClearTemporary()
     {
         foreach (GameObject o in temporary_borders)

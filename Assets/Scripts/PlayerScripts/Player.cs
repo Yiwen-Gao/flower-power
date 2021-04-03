@@ -90,13 +90,14 @@ public class Player : MonoBehaviour
         inventory.RemoveFromAllItems(item, count);
     }
 
-    private void plant(Hex h, string plant_name) {
-        h.setPlant(plant_name);
-        inventory.AddToAllItems(plant_name, 1);
+    public void Plant(Hex h, string plant_name) {
+        h.AddFlowerToHex(plant_name);
+        inventory.RemoveFromAllItems(plant_name, 1);
+        UpdateDisplay();
     }
 
-    private void harvest(Hex h) {
-        inventory.AddToAllItems(h.plant_name, h.plant_abundance);
-        h.plant_time = 0;
-    }
+    // private void Harvest(Hex h) {
+    //     inventory.AddToAllItems(h.plant_name, h.plant_abundance);
+    //     h.plant_time = 0;
+    // }
 }

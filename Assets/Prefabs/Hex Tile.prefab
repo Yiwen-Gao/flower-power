@@ -97,6 +97,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: 0
+  owner: {fileID: 0}
+  plant_name: 
+  plant_abundance: 0
+  plant_time: 0
+  flower_object: {fileID: 7319380194644738510, guid: 9629e03e224a44f56be4fe73e1dbefe4, type: 3}
 --- !u!60 &3196244514817991257
 PolygonCollider2D:
   m_ObjectHideFlags: 0

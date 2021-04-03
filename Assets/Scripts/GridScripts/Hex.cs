@@ -14,7 +14,22 @@ public class Hex : MonoBehaviour
 
     public string plant_name;
     public int plant_abundance;
-    public int plant_time;
+    public int plant_time; // so we know when to harvest 
+
+    public GameObject flower_object;
+
+    public void AddFlowerToHex(string obj_id)
+    {
+        FlowerData data = Resources.Load("Flowers/"+obj_id) as FlowerData;
+        GameObject new_flower = Instantiate(flower_object, this.transform.position, Quaternion.identity, this.transform);
+        new_flower.GetComponent<InvUICell>().UpdateStats(data.flower_name,1);
+        new_flower.GetComponent<SpriteRenderer>().sprite = data.image;
+        new_flower.GetComponent<SpriteRenderer>().sortingOrder = 20;
+
+        this.plant_name = obj_id;
+        this.plant_abundance = 1; // abundance varies for each hex/flower pair
+        this.plant_time = 0; 
+    }
 
     public void setCoords(Vector2Int coords)
     {
@@ -52,14 +67,11 @@ public class Hex : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject()) return;
         //Debug.Log("clicked");
         Player p = PlayerManager.Instance.currPlayer;
+        if (p.owned_hexes.Contains(this))
+            p.Plant(this,"Lavender"); // test
         if (p.candidate_hexes.Contains(this))
             p.ClaimHex(this); //replace with current player
-    }
-
-    public void setPlant(string plant_name) {
-        this.plant_name = plant_name;
-        this.plant_abundance = 1; // different abundance for each hex/flower pair
-        this.plant_time = 0;
+        
     }
 
     /*public void OnMouseEnter()

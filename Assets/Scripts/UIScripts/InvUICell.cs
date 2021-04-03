@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InvUICell : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class InvUICell : MonoBehaviour
     private new Text name;
 
     private Text count;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -37,4 +39,5 @@ public class InvUICell : MonoBehaviour
         name.text = data.flower_name;
         count.text = obj_count.ToString();
     }
+
 }

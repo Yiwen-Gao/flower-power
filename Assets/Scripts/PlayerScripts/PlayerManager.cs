@@ -86,6 +86,7 @@ public class PlayerManager : MonoBehaviour {
         currPlayer = players[(idx++) % players.Count];
         MoveCamera(currPlayer);
         currPlayer.UpdateDisplay();
+        updatePlantTime(currPlayer);
     }
 
     public void Trade(Player otherPlayer) {
