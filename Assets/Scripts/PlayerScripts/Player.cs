@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
 
         // display player's items
         InvUIDriver.Instance.UpdateInventory(this.inventory);
+        TradeUIDriver.Instance.UpdateTradePlayers(this);
     }
 
     public void RemoveHighlights()

@@ -49,6 +49,7 @@ public class InvUIDriver : MonoBehaviour
 
         foreach (KeyValuePair<String, int> kvp in playerInv.allItems)
         {
+            if (kvp.Value == 0) continue;
             GameObject new_inv_object = Instantiate(inv_obj_prefab);
             new_inv_object.GetComponent<InvUICell>().UpdateStats(kvp.Key,kvp.Value);
             new_inv_object.transform.SetParent(grid_container.transform);

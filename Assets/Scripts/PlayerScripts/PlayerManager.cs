@@ -108,6 +108,11 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    public void UpdateInventoryUI()
+    {
+        InvUIDriver.Instance.UpdateInventory(currPlayer.inventory);
+    }
+
     // public void harvestPlants() {
     //     foreach (Hex h in currPlayer.owned_hexes) {
     //         // if ( h.plant_time == time_to_harvest) {
