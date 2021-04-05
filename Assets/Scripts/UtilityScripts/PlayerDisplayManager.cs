@@ -61,6 +61,7 @@ public class PlayerDisplayManager : MonoBehaviour
 
     public void SetCurrentPlayerInfo(string player_name, Color player_color) 
     {
+        Debug.Log(player_name);
         TMP_Text name = player_info.GetComponentInChildren<TMP_Text>();
         Image background = player_info.GetComponent<Image>();
 

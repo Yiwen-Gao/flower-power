@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour {
 
@@ -25,16 +26,28 @@ public class PlayerManager : MonoBehaviour {
     public List<Player> players = new List<Player>();
     private int idx;
     public Player currPlayer;
+    public GameObject playerPrefab;
 
-    public GameObject mainCamera;
+    public readonly int MIN_PLAYER_NUM = 2;
+    public readonly int MAX_PLAYER_NUM = 6;
 
-    // Start is called before the first frame update
     void Start() {
-        idx = 0; //players.Count-1;
-        currPlayer = players[idx];
-        AssignInitialTerritory();
+        DontDestroyOnLoad(PlayerManager.Instance);
+        Scene activeScene = SceneManager.GetActiveScene();
+        if (activeScene.buildIndex == 1) {
+            OnGameSceneLoaded(activeScene, LoadSceneMode.Additive);
+        } else {
+            SceneManager.sceneLoaded += PlayerManager.Instance.OnGameSceneLoaded;
+        }
+    }
 
-        GetNextPlayer();
+    public void OnGameSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (scene.buildIndex == 1) {
+            idx = 0; //players.Count-1;
+            currPlayer = players[idx];
+            AssignInitialTerritory();
+            GetNextPlayer();
+        }
     }
 
     private void AssignInitialTerritory() {
@@ -77,7 +90,7 @@ public class PlayerManager : MonoBehaviour {
     private void MoveCamera(Player player) {
         List<Hex> territory = player.owned_hexes;
         Vector2 center = FindCenter(territory);
-        float currHeight = mainCamera.transform.position.z;
+        float currHeight = CameraScript.Instance.transform.position.z;
         CameraScript.Instance.SetTarget(new Vector3(center.x, center.y, currHeight));
         CameraScript.Instance.ResetZoom();
     }
@@ -87,6 +100,16 @@ public class PlayerManager : MonoBehaviour {
         MoveCamera(currPlayer);
         currPlayer.UpdateDisplay();
         updatePlantTime(currPlayer);
+    }
+
+    public void AddNewPlayer(string name) {
+        GameObject gameObject = Instantiate(playerPrefab, transform);
+        Player player = gameObject.GetComponent<Player>();
+        player.player_name = name;
+        player.player_number = players.Count;
+        player.player_color = Random.ColorHSV(0f, 1f, 0f, 1f, 0f, 1f, 1f, 1f);
+
+        players.Add(player);
     }
 
     public void Trade(Player otherPlayer) {
