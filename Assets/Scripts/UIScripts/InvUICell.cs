@@ -34,9 +34,12 @@ public class InvUICell : MonoBehaviour
         if (data == null)
         {
             data = Resources.Load("Flowers/Placeholder") as FlowerData;
+            name.text = obj_id;
+        }
+        else {
+            name.text = data.flower_name;
         }
         img.sprite = data.image;
-        name.text = data.flower_name;
         count.text = obj_count.ToString();
     }
 

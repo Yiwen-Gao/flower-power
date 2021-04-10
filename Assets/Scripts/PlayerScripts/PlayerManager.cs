@@ -131,9 +131,10 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    public void UpdateInventoryUI()
-    {
-        InvUIDriver.Instance.UpdateInventory(currPlayer.inventory);
+    public void UpdateInventoryUI() {
+        if (currPlayer == null) return;
+        if (InvUIDriver.Instance != null)
+            InvUIDriver.Instance.UpdateInventory(currPlayer.inventory);
     }
 
     // public void harvestPlants() {

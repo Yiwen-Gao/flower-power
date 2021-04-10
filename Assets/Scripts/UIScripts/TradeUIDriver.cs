@@ -72,6 +72,7 @@ public class TradeUIDriver : MonoBehaviour
             tcell.UpdateStats(kvp.Key,kvp.Value);
             tcell.linked_player = player;
             new_inv_object.transform.SetParent(grid_container.transform);
+            tcell.GetComponent<RectTransform>().localScale = Vector3.one;
             inventory_objects.Add(new_inv_object);
         }
         
@@ -136,6 +137,7 @@ public class TradeUIDriver : MonoBehaviour
             tcell.UpdateStats(kvp.Key,kvp.Value);
             tcell.linked_player = other_player;
             new_inv_object.transform.SetParent(other_grid_container.transform);
+            tcell.GetComponent<RectTransform>().localScale = Vector3.one;
             other_inventory_objects.Add(new_inv_object);
         }
         

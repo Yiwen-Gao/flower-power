@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Inventory : MonoBehaviour
 {
@@ -15,8 +18,8 @@ public class Inventory : MonoBehaviour
 
     public void Start() 
     { 
-        //AddToAllItems("TrumpetFlower", Random.Range(1,30));
-        //AddToAllItems("Lavender", Random.Range(1,30));
+        AddToAllItems("TrumpetFlower", Random.Range(1,30));
+        AddToAllItems("Lavender", Random.Range(1,30));
         
         /*for (char c = 'a'; c <= 'z'; c++)
         {
@@ -92,6 +95,11 @@ public class Inventory : MonoBehaviour
             }
         }
         PlayerManager.Instance.UpdateInventoryUI();
+    }
+
+    public int GetItemCount(string name) {
+        if (!allItems.ContainsKey(name)) return 0;
+        return allItems[name];
     }
 
     public Dictionary<string,int> GetTradeItems() {

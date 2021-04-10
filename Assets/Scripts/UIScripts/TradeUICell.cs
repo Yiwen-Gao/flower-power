@@ -41,9 +41,12 @@ public class TradeUICell : MonoBehaviour
         if (data == null)
         {
             data = Resources.Load("Flowers/Placeholder") as FlowerData;
+            name.text = obj_id;
+        }
+        else {
+            name.text = data.flower_name;
         }
         img.sprite = data.image;
-        name.text = data.flower_name;
         count.text = marked_count+ "/" + obj_count.ToString();
         max_count = obj_count;
         this.obj_id = obj_id;
