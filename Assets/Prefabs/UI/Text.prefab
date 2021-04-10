@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7293412688097642404}
   - component: {fileID: 7293412688097642427}
   m_Layer: 5
-  m_Name: Game Title Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Flower Power
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_sharedMaterial: {fileID: -7323287759861695465, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -131,6 +131,6 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
