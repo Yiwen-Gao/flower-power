@@ -7,17 +7,21 @@ public class Inventory : MonoBehaviour
     public Dictionary<string,int> allItems;
     private Dictionary<string,int> tradeItems;
 
-    public void Start() 
-    { 
+    public void Awake() 
+    {
         allItems = new Dictionary<string,int>();
         tradeItems = new Dictionary<string,int>();
+    }
 
-        AddToAllItems("TrumpetFlower", 1);
-        AddToAllItems("Lavender", 2);
-        for (char c = 'a'; c <= 'z'; c++)
+    public void Start() 
+    { 
+        AddToAllItems("TrumpetFlower", Random.Range(1,30));
+        AddToAllItems("Lavender", Random.Range(1,30));
+        
+        /*for (char c = 'a'; c <= 'z'; c++)
         {
             AddToAllItems(c.ToString(), 1);
-        }
+        }*/
     }
 
     private bool AddItem(Dictionary<string,int> items, string name, int count)
@@ -30,6 +34,7 @@ public class Inventory : MonoBehaviour
         {
             items.Add(name,count);
         }
+        PlayerManager.Instance.UpdateInventoryUI();
         return true;
     }
 
@@ -38,8 +43,10 @@ public class Inventory : MonoBehaviour
         if (items.ContainsKey(name) && items[name] >= count)
         {
             items[name] -= count;
+            PlayerManager.Instance.UpdateInventoryUI();
             return true;
         }
+        PlayerManager.Instance.UpdateInventoryUI();
         return false;
     }
 
@@ -84,6 +91,7 @@ public class Inventory : MonoBehaviour
                 allItems.Add(item.Key,item.Value);
             }
         }
+        PlayerManager.Instance.UpdateInventoryUI();
     }
 
     public Dictionary<string,int> GetTradeItems() {
