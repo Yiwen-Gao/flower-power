@@ -37,6 +37,7 @@ public class HexGrid : MonoBehaviour
     public float hex_size; //physical size of a hex
 
     public GameObject base_hex_object;
+    public GameObject effect_object;
 
     void Awake()
     {

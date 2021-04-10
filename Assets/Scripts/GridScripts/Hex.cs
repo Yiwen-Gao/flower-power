@@ -69,9 +69,11 @@ public class Hex : MonoBehaviour
         Player p = PlayerManager.Instance.currPlayer;
         if (p.owned_hexes.Contains(this))
             p.Plant(this,"Lavender"); // test
-        if (p.candidate_hexes.Contains(this))
+        if (p.candidate_hexes.Contains(this)) {
             p.ClaimHex(this); //replace with current player
-        
+            GameObject effect = Instantiate(HexGrid.Instance.effect_object, transform.position, Quaternion.identity);
+            effect.GetComponent<SpriteRenderer>().color = p.player_color;
+        }
     }
 
     /*public void OnMouseEnter()
