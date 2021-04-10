@@ -40,6 +40,7 @@ public class InvUIDriver : MonoBehaviour
 
     public void UpdateInventory(Inventory playerInv)
     {
+        Debug.Log(playerInv);
         foreach (GameObject go in inventory_objects)
         {
             Destroy(go);

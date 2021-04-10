@@ -48,7 +48,7 @@ MonoBehaviour:
   player_number: 0
   owned_hexes: []
   candidate_hexes: []
-  player_color: {r: 0, g: 0, b: 0, a: 0}
+  player_color: {r: 0, g: 0, b: 0, a: 1}
   inventory: {fileID: -89036655537527412}
 --- !u!114 &-89036655537527412
 MonoBehaviour:

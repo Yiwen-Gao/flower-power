@@ -10,41 +10,45 @@ public class MenuManager : MonoBehaviour {
 
     public TMP_InputField playerInput;
     public GameObject displayContainer;
-
     public UnityEngine.UI.Button startButton;
-    private List<string> playerNames;
-
-    public int MAX_PLAYER_NUM = 6;
+    public UnityEngine.UI.Button addButton;
 
     void Start() {
         // SubmitEvent event = new InputField.SubmitEvent();
         // event.AddListener(AddPlayer);
         // playerInput.onSubmit = event;
-
-        playerNames = new List<string>();
     }
 
     public void AddPlayer() {
-        if (playerNames.Count < MAX_PLAYER_NUM) {
-            string name = playerInput.text;
+        List<Player> players = PlayerManager.Instance.players;
+        string name = playerInput.text;
+        if (players.Count < PlayerManager.Instance.MAX_PLAYER_NUM && name.Length > 0) {
             playerInput.text = "";
-            
-            playerNames.Add(name);
-            int idx = playerNames.Count - 1;
+            PlayerManager.Instance.AddNewPlayer(name);
+            int idx = players.Count - 1;
+
             if (idx < displayContainer.transform.childCount) {
+                Player player = players[idx];
                 Transform nameContainer = displayContainer.transform.GetChild(idx);
-                nameContainer.GetComponent<TMP_Text>().text = name;
+                TMP_Text text = nameContainer.GetComponent<TMP_Text>();
+
+                text.text = player.player_name;
+                text.color = player.player_color;
                 nameContainer.gameObject.SetActive(true);
             }
         }
 
-        if (playerNames.Count == MAX_PLAYER_NUM) {
+        if (players.Count >= PlayerManager.Instance.MIN_PLAYER_NUM) {
             startButton.interactable = true;
+        }
+        if (players.Count == PlayerManager.Instance.MAX_PLAYER_NUM) {
+            addButton.interactable = false;
         }
     }
 
     public void StartGame() {
-        if (playerNames.Count == MAX_PLAYER_NUM) {
+        List<Player> players = PlayerManager.Instance.players;
+        if (players.Count >= PlayerManager.Instance.MIN_PLAYER_NUM) {
             int currSceneNum = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currSceneNum + 1);
         }
