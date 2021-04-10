@@ -852,8 +852,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Name...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
-  m_sharedMaterial: {fileID: -7323287759861695465, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
+  m_sharedMaterial: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -938,6 +938,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Add Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2010229508610936119, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
+    - target: {fileID: 2010229508610936119, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
     - target: {fileID: 2010229509071153004, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
       propertyPath: m_Name
       value: Add Player Button
@@ -1115,8 +1123,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
-  m_sharedMaterial: {fileID: -7323287759861695465, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
+  m_sharedMaterial: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1274,8 +1282,6 @@ MonoBehaviour:
   players: []
   currPlayer: {fileID: 0}
   playerPrefab: {fileID: 6745942224912310627, guid: da00f0bc4ff274e45a58342a0c849263, type: 3}
-  MIN_PLAYER_NUM: 2
-  MAX_PLAYER_NUM: 6
 --- !u!4 &1252317405
 Transform:
   m_ObjectHideFlags: 0
@@ -1873,6 +1879,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7293412688097642427, guid: 322bc95422e6e426dbc7e09fcc79230f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
+    - target: {fileID: 7293412688097642427, guid: 322bc95422e6e426dbc7e09fcc79230f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 322bc95422e6e426dbc7e09fcc79230f, type: 3}
 --- !u!1001 &1948233748
@@ -1886,6 +1900,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Start Game
       objectReference: {fileID: 0}
+    - target: {fileID: 2010229508610936119, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
+    - target: {fileID: 2010229508610936119, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
     - target: {fileID: 2010229509071153004, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
       propertyPath: m_Name
       value: Start Game Button
@@ -2121,7 +2143,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
