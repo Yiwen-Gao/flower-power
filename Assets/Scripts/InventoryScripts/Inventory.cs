@@ -7,13 +7,16 @@ public class Inventory : MonoBehaviour
     public Dictionary<string,int> allItems;
     private Dictionary<string,int> tradeItems;
 
-    public void Start() 
-    { 
+    public void Awake() 
+    {
         allItems = new Dictionary<string,int>();
         tradeItems = new Dictionary<string,int>();
+    }
 
-        AddToAllItems("TrumpetFlower", Random.Range(1,30));
-        AddToAllItems("Lavender", Random.Range(1,30));
+    public void Start() 
+    { 
+        //AddToAllItems("TrumpetFlower", Random.Range(1,30));
+        //AddToAllItems("Lavender", Random.Range(1,30));
         
         /*for (char c = 'a'; c <= 'z'; c++)
         {
