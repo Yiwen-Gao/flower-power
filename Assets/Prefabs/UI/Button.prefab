@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Complete Turn
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
-  m_sharedMaterial: {fileID: -7323287759861695465, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
+  m_sharedMaterial: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 2010229509071153007}
   - component: {fileID: 2010229509071153006}
   m_Layer: 5
-  m_Name: Complete Turn Button
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Player
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
-  m_sharedMaterial: {fileID: -7323287759861695465, guid: afa811b732f2447378b4a5c62265baa9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
+  m_sharedMaterial: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -315,7 +315,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a744f871a86824cd88f67674b0ab1042, type: 3}
+    m_Font: {fileID: 12800000, guid: c6d94c2db11a94ad6a68dd58342a0b57, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
@@ -603,7 +603,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a744f871a86824cd88f67674b0ab1042, type: 3}
+    m_Font: {fileID: 12800000, guid: c6d94c2db11a94ad6a68dd58342a0b57, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
@@ -3362,7 +3362,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: c6d94c2db11a94ad6a68dd58342a0b57, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
@@ -5373,7 +5373,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a744f871a86824cd88f67674b0ab1042, type: 3}
+    m_Font: {fileID: 12800000, guid: c6d94c2db11a94ad6a68dd58342a0b57, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
@@ -7752,6 +7752,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 384127125}
     m_Modifications:
+    - target: {fileID: 2010229508610936119, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
+    - target: {fileID: 2010229508610936119, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
     - target: {fileID: 2010229509071153004, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
       propertyPath: m_Name
       value: Complete Turn Button

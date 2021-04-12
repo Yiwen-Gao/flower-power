@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour {
     }
 
     public void OnGameSceneLoaded(Scene scene, LoadSceneMode mode) {
-        if (scene.buildIndex == 1) {
+        if (scene.buildIndex == 2) {
             idx = 0; //players.Count-1;
             currPlayer = players[idx];
             AssignInitialTerritory();

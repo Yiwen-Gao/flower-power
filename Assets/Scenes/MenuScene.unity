@@ -1000,7 +1000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2010229509071153005, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -118
+      value: -153
       objectReference: {fileID: 0}
     - target: {fileID: 2010229509071153005, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1527,8 +1527,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6b02c8236e2eb49f0a557205a210dac7, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1795,6 +1795,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Title Text
       objectReference: {fileID: 0}
+    - target: {fileID: 7293412688097642425, guid: 322bc95422e6e426dbc7e09fcc79230f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7293412688097642426, guid: 322bc95422e6e426dbc7e09fcc79230f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1962,7 +1966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2010229509071153005, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -119
+      value: -154
       objectReference: {fileID: 0}
     - target: {fileID: 2010229509071153005, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2002,7 +2006,7 @@ PrefabInstance:
       objectReference: {fileID: 305951423}
     - target: {fileID: 2010229509071153006, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: LoadNextScene
       objectReference: {fileID: 0}
     - target: {fileID: 2010229509071153006, guid: fe16e984c4db049e1af77b2bf0e6afa9, type: 3}
       propertyPath: m_Interactable
@@ -2050,7 +2054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -208, y: -117}
+  m_AnchoredPosition: {x: -208, y: -152}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1990856885

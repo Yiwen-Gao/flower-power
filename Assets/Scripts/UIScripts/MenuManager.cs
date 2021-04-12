@@ -46,7 +46,7 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
-    public void StartGame() {
+    public void LoadNextScene() {
         List<Player> players = PlayerManager.Instance.players;
         if (players.Count >= PlayerManager.Instance.MIN_PLAYER_NUM) {
             int currSceneNum = SceneManager.GetActiveScene().buildIndex;
