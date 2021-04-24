@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d30068ff37a56a41abe5c8103355739, type: 3}
   m_Name: CommonPurple
   m_EditorClassIdentifier: 
-  flower_name: 
-  image: {fileID: 0}
+  flower_name: CommonPurple
+  image: {fileID: 21300000, guid: 62241affecb3b4c5f94c5f5d00add0e6, type: 3}
   time_to_harvest: 0

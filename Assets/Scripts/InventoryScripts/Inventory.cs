@@ -16,17 +16,6 @@ public class Inventory : MonoBehaviour
         tradeItems = new Dictionary<string,int>();
     }
 
-    public void Start() 
-    { 
-        AddToAllItems("TrumpetFlower", Random.Range(1,30));
-        AddToAllItems("Lavender", Random.Range(1,30));
-        
-        /*for (char c = 'a'; c <= 'z'; c++)
-        {
-            AddToAllItems(c.ToString(), 1);
-        }*/
-    }
-
     private bool AddItem(Dictionary<string,int> items, string name, int count)
     {
         if (items.ContainsKey(name))

@@ -33,7 +33,7 @@ public class MenuManager : MonoBehaviour {
                 TMP_Text text = nameContainer.GetComponent<TMP_Text>();
 
                 text.text = player.player_name;
-                text.color = player.player_color;
+                text.color = player.player_faction.color;
                 nameContainer.gameObject.SetActive(true);
             }
         }

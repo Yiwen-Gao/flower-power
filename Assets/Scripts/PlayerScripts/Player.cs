@@ -6,13 +6,18 @@ public class Player : MonoBehaviour
 {
     public string player_name;
     public int player_number;
+
+    public FactionData player_faction;
     
     public List<Hex> owned_hexes;
     public List<Hex> candidate_hexes; //hexes we might be able to expand to this turn
 
-    public Color player_color;
+    public Inventory inventory; 
+    public int initialFlowerAmount;
 
-    public Inventory inventory;// = new Inventory();
+    public void InitializeInventory() {
+        AddToAllItems(player_faction.flower_data.flower_name, initialFlowerAmount);
+    }
 
     public void ClaimHex(Hex to_claim) //should we check for whether this is valid here?
     {
@@ -33,7 +38,7 @@ public class Player : MonoBehaviour
     public void UpdateDisplay() 
     {
         // display player's name and color
-        PlayerDisplayManager.Instance.SetCurrentPlayerInfo(this.player_name, this.player_color);
+        PlayerDisplayManager.Instance.SetCurrentPlayerInfo(this.player_name, this.player_faction);
 
         // checks candidates and display player's territory
         PlayerDisplayManager.Instance.ClearTemporary();

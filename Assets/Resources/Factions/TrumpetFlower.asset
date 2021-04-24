@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d30068ff37a56a41abe5c8103355739, type: 3}
+  m_Script: {fileID: 11500000, guid: f4c8f79d5b16f412181d975b3729650a, type: 3}
   m_Name: TrumpetFlower
   m_EditorClassIdentifier: 
-  flower_name: TrumpetFlower
-  image: {fileID: 21300000, guid: 09bf076372c384df888df31e731270f8, type: 3}
-  time_to_harvest: 0
+  flower_data: {fileID: 11400000, guid: e1c7f7ff263bf14438e052d693a037fd, type: 2}
+  icon: {fileID: 21300000, guid: 127a2fdc6b04043a68166113c6ae681a, type: 3}
+  color: {r: 1, g: 0.47037977, b: 0.007843137, a: 1}

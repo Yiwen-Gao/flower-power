@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    private Object[] factions;
     public List<Player> players = new List<Player>();
     private int idx;
     public Player currPlayer;
@@ -39,6 +40,8 @@ public class PlayerManager : MonoBehaviour {
         } else {
             SceneManager.sceneLoaded += PlayerManager.Instance.OnGameSceneLoaded;
         }
+
+        factions = Resources.LoadAll("Factions", typeof(FactionData));
     }
 
     public void OnGameSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -107,7 +110,8 @@ public class PlayerManager : MonoBehaviour {
         Player player = gameObject.GetComponent<Player>();
         player.player_name = name;
         player.player_number = players.Count;
-        player.player_color = Random.ColorHSV(0f, 1f, 0f, 1f, 0f, 1f, 1f, 1f);
+        player.player_faction = (FactionData) factions[players.Count % factions.Length];
+        player.InitializeInventory();
 
         players.Add(player);
     }

@@ -62,7 +62,7 @@ public class TradeUIDriver : MonoBehaviour
         inventory_objects.Clear();
 
         player_name.text = player.player_name;
-        name_background.color = player.player_color;
+        name_background.color = player.player_faction.color;
 
         foreach (KeyValuePair<String, int> kvp in player.inventory.allItems)
         {
@@ -102,7 +102,7 @@ public class TradeUIDriver : MonoBehaviour
         other_container.SetActive(!is_self);
 
         toggle_box.transform.rotation = (is_self) ? Quaternion.Euler(0, 0, 180) : Quaternion.identity;
-        toggle_background.color = (is_self) ? curr_player.player_color : other_player.player_color;
+        toggle_background.color = (is_self) ? curr_player.player_faction.color : other_player.player_faction.color;
     }
     
     
@@ -124,9 +124,9 @@ public class TradeUIDriver : MonoBehaviour
         other_inventory_objects.Clear();
 
         ColorBlock temp = select_player.colors;
-        temp.normalColor = other_player.player_color;
-        temp.highlightedColor = other_player.player_color;
-        temp.selectedColor = other_player.player_color;
+        temp.normalColor = other_player.player_faction.color;
+        temp.highlightedColor = other_player.player_faction.color;
+        temp.selectedColor = other_player.player_faction.color;
         select_player.colors = temp;
 
         foreach (KeyValuePair<String, int> kvp in other_player.inventory.allItems)

@@ -55,18 +55,17 @@ public class PlayerDisplayManager : MonoBehaviour
     public void AddClaimHighlight(Hex to_highlight)
     {
         GameObject new_border = Instantiate(border_object, to_highlight.transform.position, Quaternion.identity, to_highlight.transform);
-        new_border.GetComponent<SpriteRenderer>().color = to_highlight.owner.player_color;
+        new_border.GetComponent<SpriteRenderer>().color = to_highlight.owner.player_faction.color;
         claimed_borders.Add(new_border);
     }
 
-    public void SetCurrentPlayerInfo(string player_name, Color player_color) 
+    public void SetCurrentPlayerInfo(string player_name, FactionData player_faction) 
     {
-        Debug.Log(player_name);
         TMP_Text name = player_info.GetComponentInChildren<TMP_Text>();
-        Image background = player_info.GetComponent<Image>();
-
         name.text = player_name;
-        name.color = player_color;
-        background.color = player_color;
+        // name.color = player_faction.color;
+
+        Image background = player_info.GetComponent<Image>();
+        background.sprite = player_faction.icon;
     }
 }

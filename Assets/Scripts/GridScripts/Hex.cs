@@ -72,7 +72,7 @@ public class Hex : MonoBehaviour
         if (p.candidate_hexes.Contains(this)) {
             p.ClaimHex(this); //replace with current player
             GameObject effect = Instantiate(HexGrid.Instance.effect_object, transform.position, Quaternion.identity);
-            effect.GetComponent<SpriteRenderer>().color = p.player_color;
+            effect.GetComponent<SpriteRenderer>().color = p.player_faction.color;
         }
     }
 
