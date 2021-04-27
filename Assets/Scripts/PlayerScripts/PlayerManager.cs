@@ -102,7 +102,7 @@ public class PlayerManager : MonoBehaviour {
         currPlayer = players[(idx++) % players.Count];
         MoveCamera(currPlayer);
         currPlayer.UpdateDisplay();
-        currPlayer.UpdatePlantTimes();
+        currPlayer.UpdatePlantTime();
     }
 
     public void AddNewPlayer(string name) {
@@ -132,11 +132,4 @@ public class PlayerManager : MonoBehaviour {
         if (InvUIDriver.Instance != null) 
             InvUIDriver.Instance.UpdateInventory(currPlayer);
     }
-
-    // public void harvestPlants() {
-    //     foreach (Hex h in currPlayer.owned_hexes) {
-    //         // if ( h.plant_time == time_to_harvest) {
-    //         //     currPlayer.harvest(h);
-    //         // }
-    // }
 }

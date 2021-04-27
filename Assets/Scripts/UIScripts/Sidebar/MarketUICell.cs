@@ -6,13 +6,13 @@ using UnityEngine.Events;
 // using UnityEngine.EventSystems;
 
 public class MarketUICell : MonoBehaviour {
-    public GameObject imageContainer;
+    public Image image;
     public Button buyButton;
     public new Text name;
     public Text cost;
 
     public void UpdateStats(ItemData item) {
-        imageContainer.GetComponent<Image>().sprite = item.image;
+        image.sprite = item.image;
         name.text = item.display_name;
         cost.text = item.cost.ToString();
     }

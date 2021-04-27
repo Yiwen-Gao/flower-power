@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   display_name: Peony
   image: {fileID: 21300000, guid: e550a40f879194261926903064e763e7, type: 3}
-  time_to_harvest: 0
+  time_to_harvest: 4
+  abundance: 4

@@ -443,7 +443,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TBD
+  m_text: The Bugle Hoard are adventurers that accidentally discovered the medicinal
+    properties of bugleweeds. Don't expect to find any Hoardian staying in one place
+    for too long.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_sharedMaterial: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
@@ -1168,7 +1170,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TBD
+  m_text: The Flame Faction are renowned for their inventive prowess. It's rumored
+    that below the rivers of the Enchanted Lands, the Flame Faction have their underground
+    laboratory.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_sharedMaterial: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
@@ -1491,7 +1495,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TBD
+  m_text: 'The Order of the Peony keep to themselves. Little is known about the Order
+    beyond their mystery usage of the peony insignia. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_sharedMaterial: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
@@ -1854,7 +1859,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TBD
+  m_text: "The Trumpet Dynasty are a line of gardeners who adore hummingbirds, and
+    thus, they plant trumpet creepers to attract hummingbirds into their gardens.
+    The head of this faction always takes on the alias \u201CCreeper.\u201D"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}
   m_sharedMaterial: {fileID: 8290401496992268107, guid: b9c48a8879fb340e5bec1aa5df6e6ac1, type: 2}

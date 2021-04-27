@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InvUIDriver : MonoBehaviour
 {
@@ -48,6 +49,10 @@ public class InvUIDriver : MonoBehaviour
             new_inv_object.GetComponent<InvUICell>().UpdateStats(kvp.Key,kvp.Value);
             new_inv_object.transform.SetParent(grid_container.transform);
             new_inv_object.GetComponent<RectTransform>().localScale = Vector3.one;
+            new_inv_object.GetComponent<Button>().onClick.AddListener(() => {
+                Player currPlayer = PlayerManager.Instance.currPlayer;
+                currPlayer.selected_item = kvp.Key;
+            });
             inventory_objects.Add(new_inv_object);
         }
 

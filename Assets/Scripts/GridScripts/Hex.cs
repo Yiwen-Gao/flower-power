@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Hex : MonoBehaviour
 {
@@ -11,31 +12,13 @@ public class Hex : MonoBehaviour
     public TileType terrain;
 
     public Player owner;
+    private ItemData item;
+    private FlowerData flower;
 
-    public string plant_name;
-    public int plant_abundance;
-    public int plant_time; // so we know when to harvest 
-
-    public GameObject flower_object;
-
-    public void AddItemToHex(string obj_id) {
-        Object obj = Resources.Load("Items/" + obj_id);
-        if (obj as ItemData) {
-            ItemData data = obj as ItemData;
-        } else if (obj as FlowerData) {
-            FlowerData data = obj as FlowerData;
-            GameObject new_flower = Instantiate(flower_object, this.transform.position, Quaternion.identity, this.transform);
-            new_flower.GetComponent<InvUICell>().UpdateStats(data.name,1);
-            new_flower.GetComponent<SpriteRenderer>().sprite = data.image;
-            new_flower.GetComponent<SpriteRenderer>().sortingOrder = 20;
-
-            this.plant_name = obj_id;
-            this.plant_abundance = 1; // abundance varies for each hex/flower pair
-            this.plant_time = 0; 
-        } else {
-            Debug.Log($"Error: {obj_id} not found");
-        }
-    }
+    public GameObject containerPrefab;
+    public GameObject itemContainer;
+    public GameObject flowerContainer;
+    public GameObject harvestSignalContainer;
 
     public void setCoords(Vector2Int coords)
     {
@@ -74,13 +57,111 @@ public class Hex : MonoBehaviour
 
         Player p = PlayerManager.Instance.currPlayer;
         if (p.owned_hexes.Contains(this)) {
-            p.Plant(this); 
+            if (flower != null && flower.time_to_harvest == 0) {
+                p.Harvest(this);
+            } else {
+                p.Plant(this); 
+            }
         }
         if (p.candidate_hexes.Contains(this)) {
             p.ClaimHex(this); //replace with current player
             GameObject effect = Instantiate(HexGrid.Instance.effect_object, transform.position, Quaternion.identity);
             effect.GetComponent<SpriteRenderer>().color = p.player_faction.color;
         }
+    }
+
+    public bool AddItem(string obj_id) {
+        Object obj = Resources.Load("Items/" + obj_id);
+        if (flower != null && obj as ItemData) {
+            return AddMarketItem(obj as ItemData);
+        } else if (flower == null && obj as FlowerData) {
+            flower = obj as FlowerData;
+            flowerContainer = DisplayItem(flowerContainer, flower.image);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private bool AddMarketItem(ItemData newItem) {
+        bool isValid;
+
+        switch (newItem.name) {
+            case MarketItem.Beehive:
+                if (item == null || item.name != MarketItem.Weed) {
+                    isValid = true;
+                    flower.abundance++;
+                    item = null;
+                } else {
+                    isValid = false;
+                }
+                break;
+            case MarketItem.Herbicide:
+                if (item != null && item.name == MarketItem.Weed) {
+                    isValid = true;
+                    item = null;
+                } else {
+                    isValid = false;
+                }
+                break;
+            case MarketItem.Weed:
+                if (item == null || item.name != MarketItem.Weed) {
+                    isValid = true;
+                    item = newItem;
+                } else {
+                    isValid = false;
+                }
+                break;
+            default:
+                isValid = false;
+                break;
+        }
+
+        if (isValid) {
+            itemContainer = DisplayItem(itemContainer, newItem.image);
+        }
+        return isValid;
+    }
+
+    private GameObject DisplayItem(GameObject container, Sprite image) {
+        if (container != null) {
+            Destroy(container);
+        }
+
+        container = Instantiate(containerPrefab, this.transform.position, Quaternion.identity, this.transform);
+        container.GetComponent<SpriteRenderer>().sprite = image;
+        container.GetComponent<SpriteRenderer>().sortingOrder = 20;
+        return container;
+    }
+
+    public void UpdatePlantTime() {
+        if (flower != null) {
+            if (flower.time_to_harvest > 0 && (item == null || item.name != MarketItem.Weed)) {
+                flower.time_to_harvest--;
+            } else {
+                DisplayReadyToHarvestSignal();
+            }
+        }
+    }
+
+    private void DisplayReadyToHarvestSignal() {
+        Debug.Log("ready to harvest!");
+        if (harvestSignalContainer == null) {
+            harvestSignalContainer = Instantiate(containerPrefab, this.transform.position, Quaternion.identity, this.transform);
+        }
+        harvestSignalContainer.GetComponentInChildren<Text>().text = $"{flower.abundance}x";
+    }
+
+    public FlowerData Harvest() {
+        FlowerData data = null;
+        if (flower != null) {
+            data = flower;
+            flower = null;
+            Destroy(flowerContainer);
+            Destroy(harvestSignalContainer);
+        }
+
+        return data;
     }
 
     /*public void OnMouseEnter()
@@ -92,6 +173,12 @@ public class Hex : MonoBehaviour
     {
         this.GetComponent<SpriteRenderer>().color = Color.white;
     }*/
+}
+
+public static class MarketItem {
+    public const string Beehive = "Beehive";
+    public const string Herbicide = "Herbicide";
+    public const string Weed = "Weed";
 }
 
 public enum TileType

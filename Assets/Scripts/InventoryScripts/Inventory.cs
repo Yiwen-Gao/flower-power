@@ -57,16 +57,16 @@ public class Inventory : MonoBehaviour
 
     public bool AddToAllItems(string name, int count)
     {
-        bool isSuccessful = AddItem(allItems, name, count);
+        bool isValid = AddItem(allItems, name, count);
         PlayerManager.Instance.UpdateInventoryUI();
-        return isSuccessful;
+        return isValid;
     }
     
     public bool RemoveFromAllItems(string name, int count)
     {
-        bool isSuccessful = RemoveItem(allItems, name, count);
+        bool isValid = RemoveItem(allItems, name, count);
         PlayerManager.Instance.UpdateInventoryUI();
-        return isSuccessful;
+        return isValid;
     }
 
     public void ConfirmTrade(Dictionary<string,int> receivedItems) {
@@ -100,11 +100,7 @@ public class Inventory : MonoBehaviour
     public Dictionary<string,int> GetAllItems() {
         return allItems;
     }
-
-    public void emptyTradeItems() {
-        tradeItems = new Dictionary<string,int>();
-    }
-
+    
     public void ResetTradeItems() {
         tradeItems = new Dictionary<string,int>();
     }

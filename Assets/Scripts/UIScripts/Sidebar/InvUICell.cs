@@ -20,7 +20,6 @@ public class InvUICell : MonoBehaviour
 
     private Text count;
 
-    // Start is called before the first frame update
     void Awake()
     {
         img = img_obj.GetComponent<UnityEngine.UI.Image>();

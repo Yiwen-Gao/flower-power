@@ -113,23 +113,25 @@ public class Player : MonoBehaviour
         inventory.RemoveFromAllItems(item, count);
     }
 
-    public void Plant(Hex h) {
-        string selected_item = "Lavendar";
-        h.AddItemToHex(selected_item);
-        inventory.RemoveFromAllItems(selected_item, 1);
-        // UpdateDisplay();
+    public void UpdatePlantTime() {
+        foreach (Hex h in owned_hexes) {
+            h.UpdatePlantTime();
+        }
     }
 
-    public void UpdatePlantTimes() {
-        foreach (Hex h in owned_hexes) {
-            if (h.plant_name != null) {
-                h.plant_time += 1;
+    public void Plant(Hex h) {
+        if (inventory.GetItemCount(selected_item) > 0) {
+            bool isValid = h.AddItem(selected_item);
+            if (isValid) {
+                inventory.RemoveFromAllItems(selected_item, 1);
             }
         }
     }
 
-    // private void Harvest(Hex h) {
-    //     inventory.AddToAllItems(h.plant_name, h.plant_abundance);
-    //     h.plant_time = 0;
-    // }
+    public void Harvest(Hex h) {
+        FlowerData data = h.Harvest();
+        if (data) {
+            inventory.AddToAllItems(data.name, data.abundance);
+        }
+    }
 }

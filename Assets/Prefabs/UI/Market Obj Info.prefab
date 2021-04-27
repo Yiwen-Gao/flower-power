@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe2be944058e4129ac7b211f7c9272b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageContainer: {fileID: 4939005761091638516}
+  image: {fileID: 4939005761091638522}
   buyButton: {fileID: 4939005760254199549}
   name: {fileID: 4939005761052306730}
   cost: {fileID: 4939005761670290110}

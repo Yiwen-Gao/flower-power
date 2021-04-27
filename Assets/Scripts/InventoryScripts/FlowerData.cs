@@ -11,4 +11,5 @@ public class FlowerData : ScriptableObject
     public string display_name;
     public Sprite image;
     public int time_to_harvest;
+    public int abundance;
 }
