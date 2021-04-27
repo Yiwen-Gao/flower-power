@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d30068ff37a56a41abe5c8103355739, type: 3}
-  m_Name: FlameLily
+  m_Script: {fileID: 11500000, guid: 4d412455232994c66b3c3caac307aea0, type: 3}
+  m_Name: Herbicide
   m_EditorClassIdentifier: 
-  flower_name: 
-  image: {fileID: 0}
-  time_to_harvest: 0
+  display_name: Herbicide
+  cost: 10
+  image: {fileID: 21300000, guid: 04f08b2fa790c420f96fe243e1477768, type: 3}

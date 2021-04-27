@@ -50,7 +50,8 @@ MonoBehaviour:
   owned_hexes: []
   candidate_hexes: []
   inventory: {fileID: -89036655537527412}
-  initialFlowerAmount: 10
+  initial_flower_amount: 10
+  selected_item: 
 --- !u!114 &-89036655537527412
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -42,9 +42,7 @@ public class HexGrid : MonoBehaviour
     void Awake()
     {
         SetupGrid();
-
         generate_map();
-        // print_map();
     }
 
     public void SetupGrid() //spawns in a grid with the desired dimensions
@@ -198,21 +196,6 @@ public class HexGrid : MonoBehaviour
 
             hexgrid[new_element.x, new_element.y].setTerrain(TileType.Meadow);
         }
-    }
-
-    public void print_map()
-    {
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                if (hexgrid[i, j].terrain == TileType.Meadow)
-                    Debug.Log(1);
-                else
-                    Debug.Log(0);
-            }
-        }
-
     }
 
     public void DebugAssignPlayerHex(Player p, Hex h)

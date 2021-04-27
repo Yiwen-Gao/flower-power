@@ -28,19 +28,23 @@ public class InvUICell : MonoBehaviour
         count = obj_count_obj.GetComponent<Text>();
     }
 
-    public void UpdateStats(string obj_id, int obj_count)
-    {
-        FlowerData data = Resources.Load("Flowers/"+obj_id) as FlowerData;
-        if (data == null)
-        {
-            data = Resources.Load("Flowers/Placeholder") as FlowerData;
-            name.text = obj_id;
+    public void UpdateStats(string obj_id, int obj_count) {
+        Object obj = Resources.Load("Items/" + obj_id);
+        if (obj as ItemData) {
+            ItemData data = obj as ItemData;
+            SetStats(data.image, data.display_name, obj_count);
+        } else if (obj as FlowerData) {
+            FlowerData data = obj as FlowerData;
+            SetStats(data.image, data.display_name, obj_count);
+        } else {
+            FlowerData data = Resources.Load("Items/Placeholder") as FlowerData;
+            SetStats(data.image, obj_id, obj_count);
         }
-        else {
-            name.text = data.flower_name;
-        }
-        img.sprite = data.image;
-        count.text = obj_count.ToString();
     }
 
+    private void SetStats(Sprite image, string name, int count) {
+        img.sprite = image;
+        this.name.text = name;
+        this.count.text = count.ToString();
+    }
 }

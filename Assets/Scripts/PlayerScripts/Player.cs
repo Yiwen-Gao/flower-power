@@ -13,10 +13,12 @@ public class Player : MonoBehaviour
     public List<Hex> candidate_hexes; //hexes we might be able to expand to this turn
 
     public Inventory inventory; 
-    public int initialFlowerAmount;
+    public int initial_flower_amount;
+
+    public string selected_item;
 
     public void InitializeInventory() {
-        AddToAllItems(player_faction.flower_data.flower_name, initialFlowerAmount);
+        AddToAllItems(player_faction.flower_data.name, initial_flower_amount);
     }
 
     public void ClaimHex(Hex to_claim) //should we check for whether this is valid here?
@@ -46,8 +48,8 @@ public class Player : MonoBehaviour
         PlayerDisplayManager.Instance.BuildTemporary(candidate_hexes);
 
         // display player's items
-        InvUIDriver.Instance.UpdateInventory(this.inventory);
-        TradeUIDriver.Instance.UpdateTradePlayers(this);
+        InvUIDriver.Instance.UpdateInventory(this);
+        // TradeUIDriver.Instance.UpdateTradePlayers(this);
     }
 
     public void RemoveHighlights()
@@ -80,6 +82,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public int getFlowerCount() {
+        string factionFlower = player_faction.flower_data.name;
+        if (inventory.allItems.ContainsKey(factionFlower)) {
+            return inventory.allItems[factionFlower];
+        } 
+
+        return 0;
+    }
+
+    public void PayWithFlowers(string itemName, int itemCost) {
+        string factionFlower = player_faction.flower_data.name;
+        inventory.RemoveFromAllItems(factionFlower, itemCost);
+        inventory.AddToAllItems(itemName, 1);
+    }
+
     public void AddToTradeItems(string item, int count) {
         inventory.AddToTradeItems(item, count);
     }
@@ -96,10 +113,19 @@ public class Player : MonoBehaviour
         inventory.RemoveFromAllItems(item, count);
     }
 
-    public void Plant(Hex h, string plant_name) {
-        h.AddFlowerToHex(plant_name);
-        inventory.RemoveFromAllItems(plant_name, 1);
-        UpdateDisplay();
+    public void Plant(Hex h) {
+        string selected_item = "Lavendar";
+        h.AddItemToHex(selected_item);
+        inventory.RemoveFromAllItems(selected_item, 1);
+        // UpdateDisplay();
+    }
+
+    public void UpdatePlantTimes() {
+        foreach (Hex h in owned_hexes) {
+            if (h.plant_name != null) {
+                h.plant_time += 1;
+            }
+        }
     }
 
     // private void Harvest(Hex h) {

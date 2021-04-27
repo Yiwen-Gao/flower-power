@@ -30,17 +30,10 @@ public class InvUIDriver : MonoBehaviour
     public GameObject grid_container;
 
     public GameObject inv_obj_prefab;
-    // Start is called before the first frame update
 
-
-    void Start()
+    public void UpdateInventory(Player player)
     {
-        
-    }
-
-    public void UpdateInventory(Inventory playerInv)
-    {
-        Debug.Log(playerInv);
+        Inventory playerInv = player.inventory;
         foreach (GameObject go in inventory_objects)
         {
             Destroy(go);
@@ -57,5 +50,8 @@ public class InvUIDriver : MonoBehaviour
             new_inv_object.GetComponent<RectTransform>().localScale = Vector3.one;
             inventory_objects.Add(new_inv_object);
         }
+
+        // have to update trade container after buying items
+        TradeUIDriver.Instance.UpdateTradePlayers(player);
     }
 }

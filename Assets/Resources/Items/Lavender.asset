@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d30068ff37a56a41abe5c8103355739, type: 3}
-  m_Name: Bugleweed
+  m_Name: Lavender
   m_EditorClassIdentifier: 
-  flower_name: Bugleweed
-  image: {fileID: 21300000, guid: 648b7dcd404d6bf40a9abf4d43c6de17, type: 3}
+  display_name: Lavendar
+  image: {fileID: 21300000, guid: ae07d97a6614b403fa5d28efcb317b58, type: 3}
   time_to_harvest: 0

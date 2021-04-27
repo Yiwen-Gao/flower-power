@@ -26,7 +26,6 @@ public class TradeUICell : MonoBehaviour
     public Player linked_player;
     public String obj_id;
 
-    // Start is called before the first frame update
     void Awake()
     {
         img = img_obj.GetComponent<UnityEngine.UI.Image>();
@@ -35,21 +34,29 @@ public class TradeUICell : MonoBehaviour
         marked_count = 0;
     }
 
-    public void UpdateStats(string obj_id, int obj_count)
-    {
-        FlowerData data = Resources.Load("Flowers/"+obj_id) as FlowerData;
-        if (data == null)
-        {
-            data = Resources.Load("Flowers/Placeholder") as FlowerData;
-            name.text = obj_id;
+    public void UpdateStats(string obj_id, int obj_count) {
+        UnityEngine.Object obj = Resources.Load("Items/" + obj_id);
+        if (obj as ItemData) {
+            ItemData data = obj as ItemData;
+            SetStats(data.image, data.display_name);
+        }
+        else if (obj as FlowerData) {
+            FlowerData data = obj as FlowerData;
+            SetStats(data.image, data.display_name);
         }
         else {
-            name.text = data.flower_name;
+            FlowerData data = Resources.Load("Items/Placeholder") as FlowerData;
+            SetStats(data.image, obj_id);
         }
-        img.sprite = data.image;
-        count.text = marked_count+ "/" + obj_count.ToString();
+
+        count.text = marked_count + "/" + obj_count.ToString();
         max_count = obj_count;
         this.obj_id = obj_id;
+    }
+
+    private void SetStats(Sprite image, string name) {
+        img.sprite = image;
+        this.name.text = name;
     }
 
     public void AddTrade()

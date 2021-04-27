@@ -37,8 +37,6 @@ public class TradeUIDriver : MonoBehaviour
     public bool show_own_inventory;
 
     public Text player_name;
-    // Start is called before the first frame update
-
 
     public List<Player> otherPlayerList;
 

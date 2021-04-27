@@ -18,17 +18,23 @@ public class Hex : MonoBehaviour
 
     public GameObject flower_object;
 
-    public void AddFlowerToHex(string obj_id)
-    {
-        FlowerData data = Resources.Load("Flowers/"+obj_id) as FlowerData;
-        GameObject new_flower = Instantiate(flower_object, this.transform.position, Quaternion.identity, this.transform);
-        new_flower.GetComponent<InvUICell>().UpdateStats(data.flower_name,1);
-        new_flower.GetComponent<SpriteRenderer>().sprite = data.image;
-        new_flower.GetComponent<SpriteRenderer>().sortingOrder = 20;
+    public void AddItemToHex(string obj_id) {
+        Object obj = Resources.Load("Items/" + obj_id);
+        if (obj as ItemData) {
+            ItemData data = obj as ItemData;
+        } else if (obj as FlowerData) {
+            FlowerData data = obj as FlowerData;
+            GameObject new_flower = Instantiate(flower_object, this.transform.position, Quaternion.identity, this.transform);
+            new_flower.GetComponent<InvUICell>().UpdateStats(data.name,1);
+            new_flower.GetComponent<SpriteRenderer>().sprite = data.image;
+            new_flower.GetComponent<SpriteRenderer>().sortingOrder = 20;
 
-        this.plant_name = obj_id;
-        this.plant_abundance = 1; // abundance varies for each hex/flower pair
-        this.plant_time = 0; 
+            this.plant_name = obj_id;
+            this.plant_abundance = 1; // abundance varies for each hex/flower pair
+            this.plant_time = 0; 
+        } else {
+            Debug.Log($"Error: {obj_id} not found");
+        }
     }
 
     public void setCoords(Vector2Int coords)
@@ -65,10 +71,11 @@ public class Hex : MonoBehaviour
     public void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        //Debug.Log("clicked");
+
         Player p = PlayerManager.Instance.currPlayer;
-        if (p.owned_hexes.Contains(this))
-            p.Plant(this,"Lavender"); // test
+        if (p.owned_hexes.Contains(this)) {
+            p.Plant(this); 
+        }
         if (p.candidate_hexes.Contains(this)) {
             p.ClaimHex(this); //replace with current player
             GameObject effect = Instantiate(HexGrid.Instance.effect_object, transform.position, Quaternion.identity);

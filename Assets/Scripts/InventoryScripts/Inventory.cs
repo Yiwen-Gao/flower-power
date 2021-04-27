@@ -26,7 +26,6 @@ public class Inventory : MonoBehaviour
         {
             items.Add(name,count);
         }
-        PlayerManager.Instance.UpdateInventoryUI();
         return true;
     }
 
@@ -38,7 +37,6 @@ public class Inventory : MonoBehaviour
             PlayerManager.Instance.UpdateInventoryUI();
             return true;
         }
-        PlayerManager.Instance.UpdateInventoryUI();
         return false;
     }
 
@@ -59,12 +57,16 @@ public class Inventory : MonoBehaviour
 
     public bool AddToAllItems(string name, int count)
     {
-        return AddItem(allItems, name, count);
+        bool isSuccessful = AddItem(allItems, name, count);
+        PlayerManager.Instance.UpdateInventoryUI();
+        return isSuccessful;
     }
     
     public bool RemoveFromAllItems(string name, int count)
     {
-        return RemoveItem(allItems, name, count);
+        bool isSuccessful = RemoveItem(allItems, name, count);
+        PlayerManager.Instance.UpdateInventoryUI();
+        return isSuccessful;
     }
 
     public void ConfirmTrade(Dictionary<string,int> receivedItems) {
