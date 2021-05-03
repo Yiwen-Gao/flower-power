@@ -99,4 +99,8 @@ public class CameraScript : MonoBehaviour
         target_zoom = default_size;
         should_go_to_target = true;
     }
+
+    public Camera GetCamera() {
+        return cam;
+    }
 }

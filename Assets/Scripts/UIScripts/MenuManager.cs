@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
@@ -14,9 +13,13 @@ public class MenuManager : MonoBehaviour {
     public UnityEngine.UI.Button addButton;
 
     void Start() {
-        // SubmitEvent event = new InputField.SubmitEvent();
-        // event.AddListener(AddPlayer);
-        // playerInput.onSubmit = event;
+        playerInput.onEndEdit.AddListener((string _) => {
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                AddPlayer();
+                playerInput.Select();
+                playerInput.ActivateInputField();
+            }
+        });
     }
 
     public void AddPlayer() {

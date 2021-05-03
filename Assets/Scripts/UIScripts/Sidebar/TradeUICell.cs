@@ -34,7 +34,7 @@ public class TradeUICell : MonoBehaviour
         marked_count = 0;
     }
 
-    public void UpdateStats(string obj_id, int obj_count) {
+    public void UpdateStats(string obj_id, int obj_count, int curr_count) {
         UnityEngine.Object obj = Resources.Load("Items/" + obj_id);
         if (obj as ItemData) {
             ItemData data = obj as ItemData;
@@ -49,7 +49,8 @@ public class TradeUICell : MonoBehaviour
             SetStats(data.image, obj_id);
         }
 
-        count.text = marked_count + "/" + obj_count.ToString();
+        count.text = curr_count + "/" + obj_count;
+        marked_count = curr_count;
         max_count = obj_count;
         this.obj_id = obj_id;
     }

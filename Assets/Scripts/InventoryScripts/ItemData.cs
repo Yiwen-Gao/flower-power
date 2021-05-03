@@ -11,4 +11,15 @@ public class ItemData : ScriptableObject
     public string display_name;
     public int cost;
     public Sprite image;
+
+    public static ItemData CreateInstance(ItemData original) {
+        ItemData copy = ScriptableObject.CreateInstance<ItemData>();
+        
+        copy.name = original.name;
+        copy.display_name = original.display_name;
+        copy.cost = original.cost;
+        copy.image = original.image;
+
+        return copy;
+    }
 }

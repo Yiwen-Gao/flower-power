@@ -8,4 +8,15 @@ public class FactionData : ScriptableObject
     public FlowerData flower_data;
     public Sprite icon;
     public Color color;
+
+    public static FactionData CreateInstance(FactionData original) {
+        FactionData copy = ScriptableObject.CreateInstance<FactionData>();
+        
+        copy.name = original.name;
+        copy.flower_data = original.flower_data;
+        copy.icon = original.icon;
+        copy.color = original.color;
+
+        return copy;
+    }
 }

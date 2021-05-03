@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Poppy
   m_EditorClassIdentifier: 
   flower_data: {fileID: 11400000, guid: 6dfda74112858429691d538e2ec783b8, type: 2}
-  icon: {fileID: 21300000, guid: e1ec33c746f374b778a81fd5e118231c, type: 3}
+  icon: {fileID: 21300000, guid: b63cfbee078a849a19bbb3c4aeb5403e, type: 3}
   color: {r: 1, g: 0.24056602, b: 0.24056602, a: 1}

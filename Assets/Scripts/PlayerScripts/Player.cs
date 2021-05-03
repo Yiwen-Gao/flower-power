@@ -17,39 +17,51 @@ public class Player : MonoBehaviour
 
     public string selected_item;
 
+    private int remainingExpansions;
+
+    public void Start() {
+        remainingExpansions = PlayerManager.Instance.expansionsPerTurn;
+    }
+
     public void InitializeInventory() {
-        AddToAllItems(player_faction.flower_data.name, initial_flower_amount);
+        inventory.AddToAllItems(player_faction.flower_data.name, initial_flower_amount);
     }
 
     public void ClaimHex(Hex to_claim) //should we check for whether this is valid here?
     {
-        //Debug.Log(player_number + " claimed hex(" + to_claim.x_coord + " " + to_claim.y_coord + ")");
-        to_claim.owner = this;
-        owned_hexes.Add(to_claim);
+        if (remainingExpansions > 0) {
+            to_claim.owner = this;
+            owned_hexes.Add(to_claim);
 
-        List<Hex> neighbors = HexGrid.Instance.hexes_within_distance(to_claim, 1);
-        foreach (Hex h in neighbors)
-        {
-            candidate_hexes.Add(h);
+            List<Hex> neighbors = HexGrid.Instance.hexes_within_distance(to_claim, 1);
+            foreach (Hex h in neighbors)
+            {
+                candidate_hexes.Add(h);
+            }
+            
+            PlayerDisplayManager.Instance.AddClaimHighlight(to_claim);
+            UpdateDisplay();
+            remainingExpansions--;
         }
-        
-        PlayerDisplayManager.Instance.AddClaimHighlight(to_claim);
-        UpdateDisplay();
     }
 
-    public void UpdateDisplay() 
-    {
+    public void UpdateData() {
+        // reset number of hexes that player can claim in turn
+        remainingExpansions = PlayerManager.Instance.expansionsPerTurn;
         // display player's name and color
         PlayerDisplayManager.Instance.SetCurrentPlayerInfo(this.player_name, this.player_faction);
 
-        // checks candidates and display player's territory
+        UpdateDisplay();
+        UpdateInventory();
+        UpdatePlantTime();
+    }
+
+    // checks candidates and display player's territory
+    private void UpdateDisplay() 
+    {
         PlayerDisplayManager.Instance.ClearTemporary();
         CheckCandidates();
         PlayerDisplayManager.Instance.BuildTemporary(candidate_hexes);
-
-        // display player's items
-        InvUIDriver.Instance.UpdateInventory(this);
-        // TradeUIDriver.Instance.UpdateTradePlayers(this);
     }
 
     public void RemoveHighlights()
@@ -82,13 +94,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    // update display of player's items
+    public void UpdateInventory() {
+        InvUIDriver.Instance.UpdateInventory(this);
+    }
+
     public int getFlowerCount() {
         string factionFlower = player_faction.flower_data.name;
-        if (inventory.allItems.ContainsKey(factionFlower)) {
-            return inventory.allItems[factionFlower];
-        } 
-
-        return 0;
+        return inventory.GetAllItemCount(factionFlower);
     }
 
     public void PayWithFlowers(string itemName, int itemCost) {
@@ -97,30 +110,14 @@ public class Player : MonoBehaviour
         inventory.AddToAllItems(itemName, 1);
     }
 
-    public void AddToTradeItems(string item, int count) {
-        inventory.AddToTradeItems(item, count);
-    }
-
-    public void RemoveFromTradeItems(string item, int count) {
-        inventory.RemoveFromTradeItems(item, count);
-    }
-    
-    public void AddToAllItems(string item, int count) {
-        inventory.AddToAllItems(item, count);
-    }
-
-    public void RemoveFromAllItems(string item, int count) {
-        inventory.RemoveFromAllItems(item, count);
-    }
-
-    public void UpdatePlantTime() {
+    private void UpdatePlantTime() {
         foreach (Hex h in owned_hexes) {
             h.UpdatePlantTime();
         }
     }
 
     public void Plant(Hex h) {
-        if (inventory.GetItemCount(selected_item) > 0) {
+        if (inventory.GetAllItemCount(selected_item) > 0) {
             bool isValid = h.AddItem(selected_item);
             if (isValid) {
                 inventory.RemoveFromAllItems(selected_item, 1);

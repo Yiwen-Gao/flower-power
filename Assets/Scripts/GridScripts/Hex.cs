@@ -15,10 +15,17 @@ public class Hex : MonoBehaviour
     private ItemData item;
     private FlowerData flower;
 
+    private bool readyToHarvest;
+
     public GameObject containerPrefab;
+
     public GameObject itemContainer;
     public GameObject flowerContainer;
     public GameObject harvestSignalContainer;
+
+    public void Start() {
+        readyToHarvest = false;
+    }
 
     public void setCoords(Vector2Int coords)
     {
@@ -62,20 +69,27 @@ public class Hex : MonoBehaviour
             } else {
                 p.Plant(this); 
             }
-        }
-        if (p.candidate_hexes.Contains(this)) {
+        } else if (p.candidate_hexes.Contains(this)) {
             p.ClaimHex(this); //replace with current player
             GameObject effect = Instantiate(HexGrid.Instance.effect_object, transform.position, Quaternion.identity);
             effect.GetComponent<SpriteRenderer>().color = p.player_faction.color;
+        } else if (p.selected_item == MarketItem.Weed && p.inventory.GetAllItemCount(p.selected_item) > 0) {
+            bool isValid = AddItem(p.selected_item);
+            if (isValid) {
+                p.inventory.RemoveFromAllItems(p.selected_item, 1);
+            }
         }
     }
 
     public bool AddItem(string obj_id) {
         Object obj = Resources.Load("Items/" + obj_id);
-        if (flower != null && obj as ItemData) {
-            return AddMarketItem(obj as ItemData);
+        if (readyToHarvest) {
+            return false;
+        } else if (flower != null && obj as ItemData) {
+            ItemData newItem = ItemData.CreateInstance(obj as ItemData);
+            return AddMarketItem(newItem);
         } else if (flower == null && obj as FlowerData) {
-            flower = obj as FlowerData;
+            flower = FlowerData.CreateInstance(obj as FlowerData);
             flowerContainer = DisplayItem(flowerContainer, flower.image);
             return true;
         } else {
@@ -118,48 +132,61 @@ public class Hex : MonoBehaviour
         }
 
         if (isValid) {
-            itemContainer = DisplayItem(itemContainer, newItem.image);
+            itemContainer = DisplayItem(itemContainer, newItem.image, true);
         }
         return isValid;
     }
 
-    private GameObject DisplayItem(GameObject container, Sprite image) {
+    private GameObject DisplayItem(GameObject container, Sprite image, bool isMarketItem=false) {
         if (container != null) {
             Destroy(container);
         }
-
         container = Instantiate(containerPrefab, this.transform.position, Quaternion.identity, this.transform);
         container.GetComponent<SpriteRenderer>().sprite = image;
-        container.GetComponent<SpriteRenderer>().sortingOrder = 20;
+        container.GetComponent<SpriteRenderer>().sortingOrder = isMarketItem ? 
+            SortingOrder.MarketItem : 
+            SortingOrder.FlowerItem;
+
         return container;
     }
 
     public void UpdatePlantTime() {
         if (flower != null) {
-            if (flower.time_to_harvest > 0 && (item == null || item.name != MarketItem.Weed)) {
-                flower.time_to_harvest--;
-            } else {
-                DisplayReadyToHarvestSignal();
+            if (item == null || item.name != MarketItem.Weed) {
+                if (flower.time_to_harvest > 0) {
+                    flower.time_to_harvest--;
+                } else {
+                    readyToHarvest = true;
+                    DisplayReadyToHarvestSignal();
+                }
             }
         }
     }
 
     private void DisplayReadyToHarvestSignal() {
-        Debug.Log("ready to harvest!");
+        if (!readyToHarvest) return;
         if (harvestSignalContainer == null) {
-            harvestSignalContainer = Instantiate(containerPrefab, this.transform.position, Quaternion.identity, this.transform);
+            harvestSignalContainer = Instantiate(
+                containerPrefab, 
+                this.transform.position, 
+                Quaternion.identity, 
+                this.transform
+            );
         }
-        harvestSignalContainer.GetComponentInChildren<Text>().text = $"{flower.abundance}x";
+        GameObject textContainer = harvestSignalContainer.transform.GetChild(0).gameObject; 
+        textContainer.GetComponent<Renderer>().sortingOrder = SortingOrder.HarvestSignal;
+        textContainer.GetComponent<TextMesh>().text = $"{flower.abundance}x";
     }
 
     public FlowerData Harvest() {
-        FlowerData data = null;
-        if (flower != null) {
-            data = flower;
-            flower = null;
-            Destroy(flowerContainer);
-            Destroy(harvestSignalContainer);
-        }
+        FlowerData data = flower;
+        flower = null;
+        item = null;
+        readyToHarvest = false;
+
+        Destroy(flowerContainer);
+        Destroy(itemContainer);
+        Destroy(harvestSignalContainer);
 
         return data;
     }
@@ -179,6 +206,12 @@ public static class MarketItem {
     public const string Beehive = "Beehive";
     public const string Herbicide = "Herbicide";
     public const string Weed = "Weed";
+}
+
+public static class SortingOrder {
+    public const int FlowerItem = 1;
+    public const int MarketItem = 2;
+    public const int HarvestSignal = 3;
 }
 
 public enum TileType

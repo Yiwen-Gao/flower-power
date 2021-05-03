@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class Inventory : MonoBehaviour
 {
-    public Dictionary<string,int> allItems;
+    private Dictionary<string,int> allItems;
     private Dictionary<string,int> tradeItems;
 
     public void Awake() 
@@ -34,7 +34,6 @@ public class Inventory : MonoBehaviour
         if (items.ContainsKey(name) && items[name] >= count)
         {
             items[name] -= count;
-            PlayerManager.Instance.UpdateInventoryUI();
             return true;
         }
         return false;
@@ -85,12 +84,19 @@ public class Inventory : MonoBehaviour
                 allItems.Add(item.Key,item.Value);
             }
         }
-        PlayerManager.Instance.UpdateInventoryUI();
     }
 
-    public int GetItemCount(string name) {
-        if (!allItems.ContainsKey(name)) return 0;
-        return allItems[name];
+    private int GetItemCount(Dictionary<string, int> items, string name) {
+        if (!items.ContainsKey(name)) return 0;
+        return items[name];
+    }
+
+    public int GetAllItemCount(string name) {
+        return GetItemCount(allItems, name);
+    }
+
+    public int GetTradeItemCount(string name) {
+        return GetItemCount(tradeItems, name);
     }
 
     public Dictionary<string,int> GetTradeItems() {

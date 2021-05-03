@@ -49,37 +49,40 @@ public class TradeUIDriver : MonoBehaviour
         curr_player = player;
         toggle_box.isOn = true;
         SetCurrentContainer(true);
-        
-        player.inventory.ResetTradeItems();
-        
+                
         foreach (GameObject go in inventory_objects)
         {
             Destroy(go);
         }
 
         inventory_objects.Clear();
+        player_name.text = curr_player.player_name;
+        name_background.color = curr_player.player_faction.color;
 
-        player_name.text = player.player_name;
-        name_background.color = player.player_faction.color;
-
-        foreach (KeyValuePair<String, int> kvp in player.inventory.allItems)
+        foreach (KeyValuePair<String, int> kvp in curr_player.inventory.GetAllItems())
         {
             if (kvp.Value == 0) continue;
             GameObject new_inv_object = Instantiate(trade_obj_prefab);
             TradeUICell tcell = new_inv_object.GetComponent<TradeUICell>();
-            tcell.UpdateStats(kvp.Key,kvp.Value);
-            tcell.linked_player = player;
+            tcell.UpdateStats(kvp.Key, kvp.Value, curr_player.inventory.GetTradeItemCount(kvp.Key));
+            tcell.linked_player = curr_player;
             new_inv_object.transform.SetParent(grid_container.transform);
             tcell.GetComponent<RectTransform>().localScale = Vector3.one;
             inventory_objects.Add(new_inv_object);
         }
         
+        int otherPlayerIdx = select_player.value;
+        UpdateDropdown(otherPlayerIdx);
+        UpdateOtherContainer(otherPlayerIdx);
+    }
+
+    private void UpdateDropdown(int otherPlayerIdx) {
         select_player.ClearOptions();
         otherPlayerList.Clear();
         List<Dropdown.OptionData> new_options = new List<Dropdown.OptionData>();
         foreach (Player p in PlayerManager.Instance.players)
         {
-            if (p == player) continue;
+            if (p == curr_player) continue;
             Dropdown.OptionData new_option = new Dropdown.OptionData();
             new_option.text = p.player_name;
             new_options.Add(new_option);
@@ -87,8 +90,7 @@ public class TradeUIDriver : MonoBehaviour
         }
 
         select_player.options = new_options;
-        select_player.value = 0;
-        UpdateOtherContainer(0);
+        select_player.value = otherPlayerIdx;
     }
 
     public GameObject other_container;
@@ -110,10 +112,10 @@ public class TradeUIDriver : MonoBehaviour
 
     private Player curr_player;
     private Player other_player;
+    
     public void UpdateOtherContainer(int other)
     {
         other_player = otherPlayerList[other];
-        other_player.inventory.ResetTradeItems();
         foreach (GameObject go in other_inventory_objects)
         {
             Destroy(go);
@@ -127,12 +129,12 @@ public class TradeUIDriver : MonoBehaviour
         temp.selectedColor = other_player.player_faction.color;
         select_player.colors = temp;
 
-        foreach (KeyValuePair<String, int> kvp in other_player.inventory.allItems)
+        foreach (KeyValuePair<String, int> kvp in other_player.inventory.GetAllItems())
         {
             if (kvp.Value == 0) continue;
             GameObject new_inv_object = Instantiate(trade_obj_prefab);
             TradeUICell tcell = new_inv_object.GetComponent<TradeUICell>();
-            tcell.UpdateStats(kvp.Key,kvp.Value);
+            tcell.UpdateStats(kvp.Key, kvp.Value, other_player.inventory.GetTradeItemCount(kvp.Key));
             tcell.linked_player = other_player;
             new_inv_object.transform.SetParent(other_grid_container.transform);
             tcell.GetComponent<RectTransform>().localScale = Vector3.one;
@@ -148,6 +150,6 @@ public class TradeUIDriver : MonoBehaviour
         other_player.inventory.ConfirmTrade(curr_player.inventory.GetTradeItems());
         curr_player.inventory.ResetTradeItems();
         other_player.inventory.ResetTradeItems();
-        UpdateTradePlayers(curr_player);
+        PlayerManager.Instance.UpdateInventoryUI();
     }
 }

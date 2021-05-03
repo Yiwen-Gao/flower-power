@@ -34,7 +34,6 @@ public class InvUIDriver : MonoBehaviour
 
     public void UpdateInventory(Player player)
     {
-        Inventory playerInv = player.inventory;
         foreach (GameObject go in inventory_objects)
         {
             Destroy(go);
@@ -42,7 +41,7 @@ public class InvUIDriver : MonoBehaviour
 
         inventory_objects.Clear();
 
-        foreach (KeyValuePair<String, int> kvp in playerInv.allItems)
+        foreach (KeyValuePair<String, int> kvp in player.inventory.GetAllItems())
         {
             if (kvp.Value == 0) continue;
             GameObject new_inv_object = Instantiate(inv_obj_prefab);

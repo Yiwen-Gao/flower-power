@@ -32,6 +32,8 @@ public class PlayerManager : MonoBehaviour {
     public readonly int MIN_PLAYER_NUM = 2;
     public readonly int MAX_PLAYER_NUM = 6;
 
+    public int expansionsPerTurn = 10;
+
     void Start() {
         DontDestroyOnLoad(PlayerManager.Instance);
         Scene activeScene = SceneManager.GetActiveScene();
@@ -100,9 +102,8 @@ public class PlayerManager : MonoBehaviour {
 
     public void GetNextPlayer() {
         currPlayer = players[(idx++) % players.Count];
+        currPlayer.UpdateData();
         MoveCamera(currPlayer);
-        currPlayer.UpdateDisplay();
-        currPlayer.UpdatePlantTime();
     }
 
     public void AddNewPlayer(string name) {
@@ -116,20 +117,8 @@ public class PlayerManager : MonoBehaviour {
         players.Add(player);
     }
 
-    public void Trade(Player otherPlayer) {
-        Dictionary<string,int> currItems = currPlayer.inventory.GetTradeItems();
-        Dictionary<string,int> otherItems = otherPlayer.inventory.GetTradeItems();
-        
-        currPlayer.inventory.ConfirmTrade(otherItems);
-        otherPlayer.inventory.ConfirmTrade(currItems);
-        
-        currPlayer.inventory.ResetTradeItems();
-        otherPlayer.inventory.ResetTradeItems();
-    }
-
     public void UpdateInventoryUI() {
         if (currPlayer == null) return;
-        if (InvUIDriver.Instance != null) 
-            InvUIDriver.Instance.UpdateInventory(currPlayer);
+        currPlayer.UpdateInventory();
     }
 }

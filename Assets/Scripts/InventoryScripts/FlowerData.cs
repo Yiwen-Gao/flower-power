@@ -12,4 +12,16 @@ public class FlowerData : ScriptableObject
     public Sprite image;
     public int time_to_harvest;
     public int abundance;
+
+    public static FlowerData CreateInstance(FlowerData original) {
+        FlowerData copy = ScriptableObject.CreateInstance<FlowerData>();
+
+        copy.name = original.name;
+        copy.display_name = original.display_name;
+        copy.image = original.image;
+        copy.time_to_harvest = original.time_to_harvest;
+        copy.abundance = original.abundance;
+
+        return copy;
+    }
 }
