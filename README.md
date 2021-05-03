@@ -1,8 +1,9 @@
 # Flower Power
-**Columbia University Game Development and Design**
-*Spring 2021*
+**Columbia University Game Development and Design** *Spring 2021*
 
 ## About
+![image](https://user-images.githubusercontent.com/32348009/116834722-36dde580-ab74-11eb-9478-06899b1ea052.png)
+
 Flower Power contains the elements of all of your favorite games: Settlers of Catan and Civilization (lowkey-Farmville and Stardew Valley). Join a Faction and compete against other players in gaining control over The Enchanted Lands with your formidable strategic flower planting skills!
 
 ## To Play
